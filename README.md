@@ -1,8 +1,6 @@
 # BrowserQuest-PHP
 BrowserQuest server in PHP
 
-![BrowserQuest width workerman](https://github.com/walkor/BrowserQuest-PHP/blob/master/Web/img/screenshot.jpg?raw=true)
-
 ##Install
 
 git clone https://github.com/walkor/BrowserQuest-PHP
@@ -20,7 +18,7 @@ check ```php start.php status```   <br>
 stop ```php start.php stop```  <br>
 
 ## Windows - Start and Stop for Windows
- start_for_win.bat启动
+start_for_win.bat
 Double click start_for_win.bat for start.
 Press ctrl + c to stop.
 
