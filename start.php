@@ -18,6 +18,6 @@ define('GLOBAL_START', true);
 // socket服务端文件
 require_once __DIR__ . '/start_worker.php';
 // web服务
-require_once __DIR__ . '/start_web.php';
+
 
 Worker::runAll();

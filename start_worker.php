@@ -19,8 +19,17 @@ use \Server\WorldServer;
 // 自动加载类
 require_once __DIR__ . '/vendor/autoload.php';
 
+$context = array(
+	    'ssl' => array(
+		            'local_cert'  => '/etc/letsencrypt/live/9.keva.app/fullchain.pem', // 也可以是crt文件
+			            'local_pk'    => '/etc/letsencrypt/live/9.keva.app/privkey.pem',
+				            'verify_peer' => false,
+					        )
+);
+
 // BrowserQuest Server
-$ws_worker = new Worker('Websocket://0.0.0.0:8000');
+$ws_worker = new Worker('Websocket://0.0.0.0:8000',$context);
+$ws_worker->transport = 'ssl';
 $ws_worker->name = 'BrowserQuestWorker';
 $ws_worker->onWorkerStart = function($ws_worker)
 {

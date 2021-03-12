@@ -18,7 +18,7 @@ use Workerman\Connection\TcpConnection;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$web = new Worker("http://0.0.0.0:8787");
+$web = new Worker("http://0.0.0.0:80");
 
 $web->count = 2;
 
