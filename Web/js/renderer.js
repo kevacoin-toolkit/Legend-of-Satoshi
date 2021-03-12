@@ -352,9 +352,9 @@ function(Camera, Item, Character, Player, Timer) {
                     this.context.globalAlpha = entity.fadingAlpha;
                 }
             
-                if(!this.mobile && !this.tablet) {
+                
                     this.drawEntityName(entity);
-                }
+                
             
                 this.context.save();
                 if(entity.flipSpriteX) {
@@ -751,16 +751,28 @@ function(Camera, Item, Character, Player, Timer) {
         },
     
         renderFrameMobile: function() {
-            this.clearDirtyRects();
-            this.preventFlickeringBug();
-
+           
+            this.clearScreen(this.context);
+        
             this.context.save();
                 this.setCameraView(this.context);
-                
-                this.drawDirtyAnimatedTiles();
-                this.drawSelectedCell();
-                this.drawDirtyEntities();
+                this.drawAnimatedTiles();
+            
+                if(this.game.started) {
+                    this.drawSelectedCell();
+                    this.drawTargetCell();
+                }
+
+                //this.drawOccupiedCells();
+                this.drawPathingCells();
+                this.drawEntities();
+                this.drawCombatInfo();
+                this.drawHighTiles(this.context);
             this.context.restore();
+        
+            // Overlay UI elements
+            this.drawCursor();
+            this.drawDebugInfo();
         },
         
         preventFlickeringBug: function() {

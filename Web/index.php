@@ -1,3 +1,24 @@
+<?php
+error_reporting(0);
+
+
+
+$_REQ = array_merge($_GET, $_POST);
+
+
+
+
+//data
+
+$ns=trim($_REQ["asset"]);
+$scode=trim($_REQ["scode"]);
+$sname=hex2bin($_REQ["gname"]);
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <!-- 
 
@@ -18,15 +39,18 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
 	<head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="viewport" content="width=device-width, initial-scale=0.56, maximum-scale=0.56, user-scalable=no">
         <link rel="icon" type="image/png" href="img/common/favicon.png">
-        <meta property="og:title" content="BrowserQuest">
+        <meta property="og:title" content="Legend of Satoshi">
         <meta property="og:type" content="website">
         <meta property="og:url" content="http://browserquest.mozilla.org/">
         <meta property="og:image" content="http://browserquest.mozilla.org/img/common/promo-title.jpg">
-        <meta property="og:site_name" content="BrowserQuest">
-        <meta property="og:description" content="Play Mozilla's BrowserQuest, an HTML5 massively multiplayer game demo powered by WebSockets!">
+        <meta property="og:site_name" content="Legend of Satoshi">
+        <meta property="og:description" content="Play Legend of Satoshi on blockchain">
         <link rel="stylesheet" href="css/main.css" type="text/css">
         <link rel="stylesheet" href="css/achievements.css" type="text/css">
         <script src="js/lib/modernizr.js" type="text/javascript"></script>
@@ -38,15 +62,18 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                 </script>
         <![endif]-->
         <script src="js/detect.js" type="text/javascript"></script>
-        <title>BrowserQuest</title>
+        <title>Legend of Satoshi</title>
 	</head>
     <!--[if lt IE 9]>
 	<body class="intro upscaled">
     <![endif]-->
+
+
+
 	<body class="intro">
 	    <noscript>
 	       <div class="alert">
-	           You need to enable JavaScript to play BrowserQuest.
+	           You need to enable JavaScript to play Legend of Satoshi.
 	       </div>
 	    </noscript>
 	    <a id="moztab" class="clickable" target="_blank" href="http://www.mozilla.org/"></a>
@@ -68,14 +95,14 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                     <article id="createcharacter">
           	           <h1>
           	               <span class="left-ornament"></span>
-          	               A Massively Multiplayer Adventure
+          	               A Blockchain Multiplayer Adventure
           	               <span class="right-ornament"></span>
                          </h1>
                          <div id="character" class="disabled">
                              <div></div>
                          </div>
                          <form action="none" method="get" accept-charset="utf-8">
-                             <input type="text" id="nameinput" class="stroke" name="player-name" placeholder="Name your character" maxlength="15">
+                             <input type="text" id="nameinput" class="stroke" name="player-name"  value="<?php echo $scode."*".$sname; ?>" readonly="readonly">
                          </form>
                          <div class="play button disabled">
                              <div></div>
@@ -104,7 +131,7 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                              <img src="img/common/spinner.gif" alt="">
                          </div>
                          <div id="create-new">
-                            <span><span>or</span> create a new character</span>
+                            <span></span>
                          </div>
                     </article>
                     <article id="confirmation">
@@ -134,12 +161,12 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                             <div id="guillaume">
                                 <div class="avatar"></div>
                                 Pixels by
-                                <a class="stroke clickable" target="_blank" href="http://twitter.com/glecollinet">Guillaume Lecollinet</a>
+                                <a class="stroke clickable" target="_blank" href="http://twitter.com/glecolliLegend of Satoshi">Guillaume LecolliLegend of Satoshi</a>
                             </div>
                             <div id="franck">
                                 <div class="avatar"></div>
                                 Code by
-                                <a class="stroke clickable" target="_blank" href="http://twitter.com/whatthefranck">Franck Lecollinet</a>
+                                <a class="stroke clickable" target="_blank" href="http://twitter.com/whatthefranck">Franck LecolliLegend of Satoshi</a>
                             </div>
                         </div>
                         <div id="seb">
@@ -156,12 +183,12 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
         	            <h1>
          	               <span class="left-ornament"></span>
          	               <span class="title">
-         	                   What is BrowserQuest?
+         	                   What is Legend of Satoshi?
          	               </span>
          	               <span class="right-ornament"></span>
                         </h1>
                         <p id="game-desc">
-                            BrowserQuest is a multiplayer game inviting you to explore a
+                            Legend of Satoshi is a multiplayer game inviting you to explore a
                             world of adventure from your Web browser.
                         </p>
                         <div class="left">
@@ -177,7 +204,7 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                         <div class="right">
                             <div class="img"></div>
                             <p>
-                                BrowserQuest is available on Firefox, Chrome, Safari as well as iOS devices and Firefox for Android.
+                                Legend of Satoshi is available on Firefox, Chrome, Safari as well as iOS devices and Firefox for Android.
                             </p>
                             <span class="link">
                                 <span class="ext-link"></span>
@@ -195,7 +222,7 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                     <article id="error">
           	           <h1>
           	               <span class="left-ornament"></span>
-          	               Your browser cannot run BrowserQuest!
+          	               Your browser cannot run Legend of Satoshi!
           	               <span class="right-ornament"></span>
                          </h1>
                          <p>
@@ -298,9 +325,11 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
 		</div>
 		<footer>
 		    <div id="sharing" class="clickable">
-		      Share this on 
-              <a href="http://twitter.com/share?url=http%3A%2F%2Fbrowserquest.mozilla.org&amp;text=Mozilla%27s%20BrowserQuest%3A%20HTML5%20massively%20multiplayer%20adventure%20game%20%23demo%20%23websockets&amp;related=glecollinet:Creators%20of%20BrowserQuest%2Cwhatthefranck" class="twitter"></a>
-              <a href="http://www.facebook.com/share.php?u=http://browserquest.mozilla.org/" class="facebook"></a>
+		        
+          
+              KEVACOIN & RAVENCOIN 
+
+
 		    </div>
 		    <div id="credits-link" class="clickable">
 		      – <span id="toggle-credits">Credits</span>
@@ -339,14 +368,12 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
             if(!Modernizr.localstorage) {
                 var alert = document.createElement("div");
                     alert.className = 'alert';
-                    alertMsg = document.createTextNode("You need to enable cookies/localStorage to play BrowserQuest");
+                    alertMsg = document.createTextNode("You need to enable cookies/localStorage to play Legend of Satoshi");
                     alert.appendChild(alertMsg);
 
                 target = document.getElementById("intro");
                 document.body.insertBefore(alert, target);
-            } else if(localStorage && localStorage.data) {
-                parchment.className = "loadcharacter";
-            }
+            } 
         </script>
         
         <script src="js/lib/log.js"></script>

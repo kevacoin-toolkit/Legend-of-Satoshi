@@ -28,8 +28,8 @@ define(['character'], function(Character) {
             "How do you like this game?",
             "It's all happening in a single web page! Isn't it crazy?",
             "It's all made possible thanks to WebSockets.",
-            "I don't know much about it, after all I'm just a program.",
-            'Why don&#x27;t you read this <a target="_blank" href="http://hacks.mozilla.org/2012/03/browserquest/">blog post</a> and learn all about it?'
+            "I don't know much about it, after all I'm just a program."
+            
         ],
     
         "villager": [
@@ -66,11 +66,11 @@ define(['character'], function(Character) {
         
         "scientist": [
             "Greetings.",
-            "I am the inventor of these two potions.",
-            "The red one will replenish your health points...",
-            "The orange one will turn you into a firefox and make you invincible...",
-            "But it only lasts for a short while.",
-            "So make good use of it!",
+            "Are you looking for Satoshi?",
+            "I'm Satoshi",
+            "Everyone here is Satoshi",
+            "Know yourself",
+            "You have to",
             "Now if you'll excuse me, I need to get back to my experiments..."
         ],
     
@@ -110,7 +110,7 @@ define(['character'], function(Character) {
             "The tougher the enemy, the higher the potential rewards.",
             "You can also unlock achievements by exploring and hunting.",
             "Click on the small cup icon to see a list of all the achievements.",
-            "Please stay a while and enjoy the many surprises of BrowserQuest",
+            "Please stay a while and enjoy the many surprises of Legend of Satoshi",
             "Farewell, young friend."
         ],
         
@@ -129,13 +129,13 @@ define(['character'], function(Character) {
         ],
         
         "octocat": [
-            "Welcome to BrowserQuest!",
-            "Want to see the source code?",
-            'Check out <a target="_blank" href="http://github.com/mozilla/BrowserQuest">the repository on GitHub</a>'
+            "Welcome to Legend of Satoshi!",
+            "You can download Kevacoin & Ravencoin wallets to play this game.",
+            'Check out <a target="_blank" href="https://kevacoin.org">Kevacoin</a> & <a target="_blank" href="https://ravencoin.org">Ravencoin</a>'
         ],
         
         "coder": [
-            "Hi! Do you know that you can also play BrowserQuest on your tablet or mobile?",
+            "Hi! Do you know that you can also play Legend of Satoshi on your tablet or mobile?",
             "That's the beauty of HTML5!",
             "Give it a try..."
         ],

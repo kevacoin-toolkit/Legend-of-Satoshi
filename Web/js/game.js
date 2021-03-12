@@ -792,9 +792,9 @@ function(InfoManager, BubbleManager, Renderer, Map, Animation, Sprite, AnimatedT
                     self.storage.savePlayer(self.renderer.getPlayerImage(),
                                             self.player.getSpriteName(),
                                             self.player.getWeaponName());
-                    self.showNotification("Welcome to BrowserQuest!");
+                    self.showNotification("Welcome to Legend of Satoshi!");
                 } else {
-                    self.showNotification("Welcome back to BrowserQuest!");
+                    self.showNotification("Welcome back to Legend of Satoshi!");
                     self.storage.setPlayerName(name);
                 }
         

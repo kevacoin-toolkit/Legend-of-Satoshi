@@ -241,7 +241,7 @@ define(['jquery', 'app'], function($, App) {
 	
             app.initHealthBar();
 	
-            $('#nameinput').attr('value', '');
+    
     		$('#chatbox').attr('value', '');
     		
         	if(game.renderer.mobile || game.renderer.tablet) {
