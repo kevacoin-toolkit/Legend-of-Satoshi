@@ -2,11 +2,13 @@
 BrowserQuest server in PHP
 
 
-1、git clone https://github.com/walkor/BrowserQuest-PHP
+git clone https://github.com/walkor/BrowserQuest-PHP
 
-2、composer install 
+cd BrowserQuest-PHP
 
-3、 Web/config/config_local.json 
+composer install 
+
+Web/config/config_local.json 
 
 
 debug ```php start.php start``` <br>
@@ -18,5 +20,6 @@ php start.php status```   <br>
 start_for_win.bat
 
 
- Original Repo
+Original Repo
+
 [https://github.com/mozilla/BrowserQuest](https://github.com/mozilla/BrowserQuest)
