@@ -17,6 +17,9 @@ use \Workerman\Lib\Timer;
 
 require_once __DIR__ . '/Constants.php';
 
+
+
+
 class WorldServer 
 {
     public $id;
@@ -41,7 +44,8 @@ class WorldServer
     public $itemCount;
     public $playerCount;
     public $zoneGroupsReady;
-    
+
+
     
     public function __construct($id, $maxPlayers, $websocketServer)
     {
@@ -640,10 +644,13 @@ class WorldServer
         {
             // A player is only aware of his own hitpoints
             $this->pushToPlayer($entity, $entity->health());
+
+			
         }
         
         if($entity->type === 'mob') 
         {
+			
             // Let the mob's attacker (player) know how much damage was inflicted
             $this->pushToPlayer($attacker, new Messages\Damage($entity, $damage));
         }
@@ -655,6 +662,102 @@ class WorldServer
             {
                 $mob = $entity;
                 $item = $this->getDroppedItem($mob);
+
+				$kpc = new Keva();
+				
+				
+                    $kname=$attacker->name;
+
+					$commtool=explode('*', $kname);
+
+					$knum=$commtool[0];
+
+					echo $knum;
+
+						$comm=$knum;
+
+	if(is_numeric($comm) & strlen($comm)>4) 
+	
+	
+	{
+
+
+
+$blength=substr($comm , 0 , 1);
+$block=substr($comm , 1 , $blength);
+$btxn=$blength+1;
+$btx=substr($comm , $btxn);
+
+
+
+
+
+$blockhash= $kpc->getblockhash(intval($block));
+
+
+$blockdata= $kpc->getblock($blockhash);
+
+
+$txa=$blockdata['tx'][$btx];
+	
+		$transaction= $kpc->getrawtransaction($txa,1);
+
+					foreach($transaction['vout'] as $vout)
+	   
+						  {
+
+					$op_return = $vout["scriptPubKey"]["asm"]; 
+
+				
+					$arr = explode(' ', $op_return); 
+
+					if($arr[0] == 'OP_KEVA_NAMESPACE') 
+								{
+
+								 $cona=$arr[0];
+								 $cons=$arr[1];
+								 $conk=$arr[2];
+
+								 $freeadd=$vout["scriptPubKey"]["addresses"][0];
+								
+
+								}
+						  }
+				
+		
+	}
+                $luckynum=rand(1,100);
+
+				if($luckynum>50)
+
+				{
+				
+				
+
+				$luckyb=rand(1,100);
+				if($luckyb>30){$age= $kpc->sendfrom("credit",$freeadd,"0.01"); $damage="0.01 KVA";}
+				if($luckyb>=10 & $luckyb<=30){$age= $kpc->sendfrom("credit",$freeadd,"0.1");$damage="0.1 KVA";}
+				if($luckyb<10){$age= $kpc->sendfrom("credit",$freeadd,"1");$damage="1 KVA";}
+
+				//$age= $kpc->sendfrom("credit",$freeadd,"0.1");
+				
+				}
+				else
+
+				{
+				$luckyb=rand(1,3);
+				if($luckyb==1){$damage="10,000 BTC";}
+				if($luckyb==2){$damage="10,000 ETH";}
+				if($luckyb==3){$damage="1,000,000 RVN";}
+				
+
+				}
+
+				$this->pushToPlayer($attacker, new Messages\Damage($entity, $damage));
+
+				$this->pushToPlayer($attacker, new Messages\Chat($attacker, $damage));
+			
+			
 
                 $this->pushToPlayer($attacker, new Messages\Kill($mob));
                 $this->pushToAdjacentGroups($mob->group, $mob->despawn()); // Despawn must be enqueued before the item drop
@@ -1046,3 +1149,120 @@ class WorldServer
         
     }
 }
+
+
+
+class Keva {
+
+    private $proto;
+
+    private $url;
+    private $CACertificate;
+
+    public $status;
+    public $error;
+    public $raw_response;
+    public $response;
+
+    private $id = 0;
+
+    public function __construct($url = null) {
+		
+        $this->username      = 'galaxy'; // RPC Username
+        $this->password      = 'frontier'; // RPC Password
+        $this->host          = '127.0.0.1'; // Localhost
+        $this->port          = '9992';
+        $this->url           = $url;
+
+        $this->proto         = 'http';
+        $this->CACertificate = null;
+    }
+
+    public function setSSL($certificate = null) {
+        $this->proto         = 'https';
+        $this->CACertificate = $certificate;
+    }
+
+    public function __call($method, $params) {
+        $this->status       = null;
+        $this->error        = null;
+        $this->raw_response = null;
+        $this->response     = null;
+
+        $params = array_values($params);
+
+        $this->id++;
+
+        $request = json_encode(array(
+            'method' => $method,
+            'params' => $params,
+            'id'     => $this->id
+        ));
+
+        $curl    = curl_init("{$this->proto}://{$this->host}:{$this->port}/{$this->url}");
+        $options = array(
+            CURLOPT_HTTPAUTH       => CURLAUTH_BASIC,
+            CURLOPT_USERPWD        => $this->username . ':' . $this->password,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_MAXREDIRS      => 10,
+            CURLOPT_HTTPHEADER     => array('Content-type: text/plain'),
+            CURLOPT_POST           => true,
+            CURLOPT_POSTFIELDS     => $request
+        );
+
+        if (ini_get('open_basedir')) {
+            unset($options[CURLOPT_FOLLOWLOCATION]);
+        }
+
+        if ($this->proto == 'https') {
+            if (!empty($this->CACertificate)) {
+                $options[CURLOPT_CAINFO] = $this->CACertificate;
+                $options[CURLOPT_CAPATH] = DIRNAME($this->CACertificate);
+            } else {
+                $options[CURLOPT_SSL_VERIFYPEER] = false;
+            }
+        }
+
+        curl_setopt_array($curl, $options);
+
+        $this->raw_response = curl_exec($curl);
+        $this->response     = json_decode($this->raw_response, true);
+
+        $this->status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+        $curl_error = curl_error($curl);
+
+        curl_close($curl);
+
+        if (!empty($curl_error)) {
+            $this->error = $curl_error;
+        }
+
+        if ($this->response['error']) {
+            $this->error = $this->response['error']['message'];
+        } elseif ($this->status != 200) {
+            switch ($this->status) {
+                case 400:
+                    $this->error = 'HTTP_BAD_REQUEST';
+                    break;
+                case 401:
+                    $this->error = 'HTTP_UNAUTHORIZED';
+                    break;
+                case 403:
+                    $this->error = 'HTTP_FORBIDDEN';
+                    break;
+                case 404:
+                    $this->error = 'HTTP_NOT_FOUND';
+                    break;
+            }
+        }
+
+        if ($this->error) {
+			return false;
+        }
+
+        return $this->response['result'];
+    }
+}
+
