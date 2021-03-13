@@ -8,6 +8,8 @@ cd BrowserQuest-PHP
 
 composer install 
 
+apt-get install php-curl
+
 Web/config/config_local.json 
 
 
