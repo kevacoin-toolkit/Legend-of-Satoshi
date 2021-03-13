@@ -43,10 +43,12 @@ define(['character'], function(Character) {
         ],
     
         "agent": [
-            "Do not try to bend the sword",
-            "That's impossible",
-            "Instead, only try to realize the truth...",
-            "There is no sword."
+            "Do you want to start mining coin?",
+            "Mining Start!",
+            "Mining Stop!",
+            "I hope some dev support this web mining in the future.",
+			"In math we trust",
+			"Mining long and prosper"
         ],
     
         "rick": [

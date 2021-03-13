@@ -93,6 +93,8 @@ define(['player', 'entityfactory', 'lib/bison'], function(Player, EntityFactory,
                 };
 
                 this.connection.onclose = function() {
+
+					
                     log.debug("Connection closed");
                     $('#container').addClass('error');
                     
@@ -102,6 +104,7 @@ define(['player', 'entityfactory', 'lib/bison'], function(Player, EntityFactory,
                         } else {
                             self.disconnected_callback("The connection to BrowserQuest has been lost");
                         }
+
                     }
                 };
             }

@@ -323,7 +323,16 @@ define(['jquery', 'app'], function($, App) {
                 if(key === 13) {
                     if($chat.attr('value') !== '') {
                         if(game.player) {
+							
+							 if($chat.attr('value') === '/afk') {
+								setInterval("click()",300000);}
+								
+							
                             game.say($chat.attr('value'));
+
+							
+							
+							
                         }
                         $chat.attr('value', '');
                         app.hideChat();

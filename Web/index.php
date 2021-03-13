@@ -161,7 +161,7 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                             <div id="guillaume">
                                 <div class="avatar"></div>
                                 Pixels by
-                                <a class="stroke clickable" target="_blank" href="http://twitter.com/glecolliLegend of Satoshi">Guillaume LecolliLegend of Satoshi</a>
+                                <a class="stroke clickable" target="_blank" href="http://twitter.com/glecolliLegend of Satoshi">Guillaume Lecolli Legend of Satoshi</a>
                             </div>
                             <div id="franck">
                                 <div class="avatar"></div>
@@ -194,7 +194,7 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                         <div class="left">
                             <div class="img"></div>
                             <p>
-                                This demo is powered by HTML5 and WebSockets, which allow for real-time gaming and apps on the Web.
+                                Input /afk to keep your name online.
                             </p>
                             <span class="link">
                                 <span class="ext-link"></span>
@@ -245,7 +245,8 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
 	                </h1>
 	                <ul>
 	                   <li><span class="icon"></span>Left click or tap to move, attack and pick up items.</li>
-	                   <li><span class="icon"></span>Press ENTER to chat.</li>
+	                   <li><span class="icon"></span>Press ENTER to chat. Input /afk to keep online</li>
+
 	                   <li><span class="icon"></span>Your character is automatically saved as you play.</li>
 	                </ul>
 	                    <p>- click anywhere to close -</p>
@@ -379,6 +380,10 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
         <script src="js/lib/log.js"></script>
         <script>
                 var require = { waitSeconds: 60 };
+function click (){
+							document.getElementById('respawn').click();
+							
+							}
         </script>
         <script data-main="js/home" src="js/lib/require-jquery.js"></script>
 	</body>
