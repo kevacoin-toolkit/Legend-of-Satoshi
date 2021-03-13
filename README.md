@@ -13,8 +13,10 @@ Web/config/config_local.json
 
 debug ```php start.php start``` <br>
 daemo```php start.php start -d```  <br>
-php start.php status```   <br>
-```php start.php stop```  <br>
+
+``` php start.php status```   <br>
+
+``` php start.php stop```  <br>
 
 
 start_for_win.bat
