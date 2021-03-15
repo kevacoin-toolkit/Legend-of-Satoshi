@@ -24,6 +24,10 @@ daemo```php start.php start -d```  <br>
 start_for_win.bat
 
 
+PHP
+
+/etc/php/7.4/cli/php.ini
+
 Original Repo
 
 [https://github.com/mozilla/BrowserQuest](https://github.com/mozilla/BrowserQuest)
