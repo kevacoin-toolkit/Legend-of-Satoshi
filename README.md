@@ -9,6 +9,7 @@ cd BrowserQuest-PHP
 composer install 
 
 apt-get install php-curl
+
 apt-get install php-bcmath
 
 Web/config/config_local.json 
