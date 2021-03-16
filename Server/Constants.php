@@ -12,6 +12,8 @@
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+
+
 define('TYPES_MESSAGES_HELLO', 0);
 define('TYPES_MESSAGES_WELCOME', 1);
 define('TYPES_MESSAGES_SPAWN', 2);

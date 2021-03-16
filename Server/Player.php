@@ -181,6 +181,47 @@ class Player extends Character
                 {
                     $this->broadcast($item->despawn());
                     $this->server->removeEntity($item);
+
+					$rpc = new Raven();
+					$kpc = new Keva();
+
+				$asset=$_SESSION['asset'];
+
+			$rvncheck=$_SESSION['rvncheck'];
+					
+					if($rvncheck["value"]!="")
+						{
+						
+						$rvnadd=trim($rvncheck["value"]);
+
+						$croll=rand(1,2);
+						
+						if($croll==1){
+
+						$carda="NUKA/COLA/CAP";
+
+						$bonuschip=$rpc->transfer($carda,1,$rvnadd);
+						
+						$damag="1 CAP";
+
+						$error = $kpc->error;
+
+						if(!$error) 
+		
+				{
+	
+				$this->server->pushToPlayer($this, new Messages\Chat($this, $damag));
+				}
+
+						
+						
+						}
+					
+						
+					
+						
+						}
+
                     
                     if($kind == TYPES_ENTITIES_FIREPOTION) 
                     {
