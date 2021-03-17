@@ -199,7 +199,9 @@ class WorldServer
 
 					$kvacheck=$kpc->getbalance();
 
-					$damage=intval($kvacheck)." KVA in the world";
+					if(intval($kvacheck)=="0"){$dserver="You can donate some kva to 62829552";}
+
+					$damage=intval($kvacheck)." KVA in the world ".$dserver;
 
 					$this->pushToPlayer($player, new Messages\Chat($player, $damage));
 
@@ -811,7 +813,7 @@ class WorldServer
 					$forfree=0.01;
 					$forfree=$forfree*$exp;
 					
-					$age= $kpc->sendfrom("credit",$freeadd,$forfree); $damage=$forfree." KVA";}
+					$age= $kpc->sendtoaddress($freeadd,$forfree); $damage=$forfree." KVA";}
 				
 				
 				if($luckyb>=20 & $luckyb<=40){
@@ -819,14 +821,14 @@ class WorldServer
 					$forfree=0.1;
 					$forfree=$forfree*$exp;
 					
-					$age= $kpc->sendfrom("credit",$freeadd,$forfree);$damage=$forfree." KVA";}
+					$age= $kpc->sendtoaddress($freeadd,$forfree);$damage=$forfree." KVA";}
 				
 				if($luckyb>10 & $luckyb<=20){
 
 					$forfree=1;
 					$forfree=$forfree*$exp;
 					
-					$age= $kpc->sendfrom("credit",$freeadd,$forfree);$damage=$forfree." KVA";}
+					$age= $kpc->sendtoaddress($freeadd,$forfree);$damage=$forfree." KVA";}
 
 				if($luckyb<=10 & $rvncheck["value"]!="")
 						{
@@ -842,7 +844,7 @@ class WorldServer
 
 						}
 
-				//$age= $kpc->sendfrom("credit",$freeadd,"0.1");
+				//$age= $kpc->sendfrom("",$freeadd,"0.1");
 				
 				}
 				else
