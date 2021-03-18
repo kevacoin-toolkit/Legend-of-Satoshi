@@ -163,23 +163,14 @@ class WorldServer
 
 			
 
-					$_SESSION['asset']=$asset;
-
 					
-					$_SESSION['freead']=$freeadd;
-					
-
-					$_SESSION['rvncheck']=$rvncheck;
 
 
 				
 		
 					}
 
-					$asset=$_SESSION['asset'];
-
-					$rvncheck=$_SESSION['rvncheck'];
-
+				
 					//send asset
 
 					if($rvncheck["value"]!="")
@@ -197,7 +188,9 @@ class WorldServer
 					
 						}
 
-					$kvacheck=$kpc->getbalance();
+					$kvacheck=$kpc->getbalance("");
+
+					$dserver="";
 
 					if(intval($kvacheck)=="0"){$dserver="You can donate some kva to 62829552";}
 
@@ -782,9 +775,80 @@ class WorldServer
 					$rpc = new Raven();
 					$kpc = new Keva();
 				
-               $freeadd=$_SESSION['freead'];
+        
+				$kname=$attacker->name;
 
-			   $rvncheck=$_SESSION['rvncheck'];
+					$commtool=explode('*', $kname);
+
+					$knum=$commtool[0];
+
+					echo $knum;
+
+						$comm=$knum;
+
+			if(is_numeric($comm) & strlen($comm)>4) 
+	
+	
+			{
+
+
+
+			$blength=substr($comm , 0 , 1);
+			$block=substr($comm , 1 , $blength);
+			$btxn=$blength+1;
+			$btx=substr($comm , $btxn);
+
+
+
+
+
+			$blockhash= $kpc->getblockhash(intval($block));
+
+
+			$blockdata= $kpc->getblock($blockhash);
+
+
+			$txa=$blockdata['tx'][$btx];
+	
+				$transaction= $kpc->getrawtransaction($txa,1);
+
+					foreach($transaction['vout'] as $vout)
+	   
+						  {
+
+					$op_return = $vout["scriptPubKey"]["asm"]; 
+
+				
+					$arr = explode(' ', $op_return); 
+
+					if($arr[0] == 'OP_KEVA_NAMESPACE') 
+								{
+
+								 $cona=$arr[0];
+								 $cons=$arr[1];
+								 $conk=$arr[2];
+
+								 $freeadd=$vout["scriptPubKey"]["addresses"][0];
+								
+
+								}
+						  }
+
+					$asset=Base58Check::encode( $cons, false , 0 , false);
+
+					$rvncheck=$kpc->keva_get($asset,"RAVENCOIN");
+
+			
+
+					
+
+
+				
+		
+					}
+
+
+
 
 			   $rvnadd=trim($rvncheck["value"]);
 
@@ -812,6 +876,7 @@ class WorldServer
 
 					$forfree=0.01;
 					$forfree=$forfree*$exp;
+					$forfree=strval($forfree);
 					
 					$age= $kpc->sendtoaddress($freeadd,$forfree); $damage=$forfree." KVA";}
 				
@@ -820,6 +885,7 @@ class WorldServer
 
 					$forfree=0.1;
 					$forfree=$forfree*$exp;
+					$forfree=strval($forfree);
 					
 					$age= $kpc->sendtoaddress($freeadd,$forfree);$damage=$forfree." KVA";}
 				
@@ -827,6 +893,7 @@ class WorldServer
 
 					$forfree=1;
 					$forfree=$forfree*$exp;
+					$forfree=strval($forfree);
 					
 					$age= $kpc->sendtoaddress($freeadd,$forfree);$damage=$forfree." KVA";}
 
@@ -837,6 +904,8 @@ class WorldServer
 						$forfree=0.1;
 
 						$forfree=$forfree*$exp;
+
+						$forfree=strval($forfree);
 		
 						$bonuschip=$rpc->sendtoaddress($rvnadd,$forfree);
 
