@@ -270,7 +270,7 @@ class Player extends Character
 						
 						$damag="1 CAP";
 
-						$error = $kpc->error;
+						$error = $rpc->error;
 
 						if(!$error) 
 		
