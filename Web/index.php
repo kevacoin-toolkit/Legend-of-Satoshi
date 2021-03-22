@@ -14,7 +14,15 @@ $ns=trim($_REQ["asset"]);
 $scode=trim($_REQ["scode"]);
 $sname=hex2bin($_REQ["gname"]);
 
+$rvn=trim($_REQ["rvn"]);
+$keva=trim($_REQ["keva"]);
+$doge=trim($_REQ["doge"]);
 
+
+
+if(!$scode){$in="";}else{$in=$scode."*".$sname;if(!$keva){$url ="https://keva.app/?rpg".$scode;echo "<script>window.location.href=decodeURIComponent('".$url."')</script>";}}
+
+if(!$scode){$serv="";}else{$serv=$scode."*".$sname."|".$keva."|".$rvn."|".$doge;}
 
 ?>
 
@@ -95,9 +103,24 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
 
 							62829552
 
-							<a target="_blank" class="clickable" href="https://explorer.kevacoin.org/address/VHKCZK9Q76A1iR2aM4Wfnk3obnzTECSi3h"><font color=white>VHKCZK9Q76A1iR2aM4Wfnk3obnzTECSi3h</font></a>
+							<a target="_blank" class="clickable" href="https://explorer.kevacoin.org/address/VCNwQjHsPoEEW1vw8JwfJkf45kpLhfomH1"><font color=white>VCNwQjHsPoEEW1vw8JwfJkf45kpLhfomH1</font></a>
 
 				</p>
+				<p>
+				<br>RVN Donation Address
+
+							<a target="_blank" class="clickable" href="https://ravencoin.network/address/RRMEDegtRSPgVfNv7viJC5S7TyeUA9Q1uD"><font color=white>RRMEDegtRSPgVfNv7viJC5S7TyeUA9Q1uD</font></a>
+
+							</p>
+
+							<p>
+				<br>DOGE Donation Address
+
+							<a target="_blank" class="clickable" href="https://blockchair.com/dogecoin/address/DQw9LVhEwnHahSDHgvmAsSzD2uMtkV6HoU"><font color=white>DQw9LVhEwnHahSDHgvmAsSzD2uMtkV6HoU</font></a>
+
+							</p>
+
+
 	        </article>
 	        <section id="parchment" class="createcharacter">
 	            <div class="parchment-left"></div>
@@ -105,7 +128,7 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                     <article id="createcharacter">
           	           <h1>
           	               <span class="left-ornament"></span>
-          	               A Blockchain Multiplayer Adventure
+          	               A Blockchain Multiplayer Adventure, <a target="_blank" class="clickable" href="https://keva.app/?62108412">Learn more</a>
           	               <span class="right-ornament"></span>
                          </h1>
                          <div id="character" class="disabled">
@@ -119,14 +142,17 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
 						 Server in Maintenance and Upgrading...サーバーのメンテナンス ...서버 유지 관리 服务器正在升级维护 обслуживание сервера 
 						 
                          
-							  --> 
+
+					  --> 							
 						
+
 						
+
                          <form action="none" method="get" accept-charset="utf-8">
-                             <input type="text" id="nameinput" class="stroke" name="player-name"  value="<?php echo $scode."*".$sname; ?>" readonly="readonly">
+						 <input type="text" id="nameinputx" class="stroke" name="player-namex"  value="<?php echo $in; ?>" readonly="readonly">
+                             <input type="hidden" id="nameinput" class="stroke" name="player-name"  value="<?php echo $serv; ?>" readonly="readonly">
                          </form>
 
-					
                          <div class="play button disabled">
                              <div></div>
                              <img src="img/common/spinner.gif" alt="">
@@ -232,17 +258,14 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                             <div class="img"></div>
                             <p>
 							
-							Server KVA Donation Address
+							Server KVA Donation<br>
 
-							62829552
+							You can follow and reward this namespace <a target="_blank" class="clickable" href="https://keva.app/?62829552">62829552</a> or find more server coins address.
 
-							<a target="_blank" class="clickable" href="https://explorer.kevacoin.org/address/VHKCZK9Q76A1iR2aM4Wfnk3obnzTECSi3h">VHKCZK9Q76A1iR2aM4Wfnk3obnzTECSi3h</a>
+							<a target="_blank" class="clickable" href="https://explorer.kevacoin.org/address/VCNwQjHsPoEEW1vw8JwfJkf45kpLhfomH1">KVA</a> <a target="_blank" class="clickable" href="https://ravencoin.network/address/RRMEDegtRSPgVfNv7viJC5S7TyeUA9Q1uD">RVN</a> <a target="_blank" class="clickable" href="https://blockchair.com/dogecoin/address/DQw9LVhEwnHahSDHgvmAsSzD2uMtkV6HoU">DOGE</a> 
 
 							</p>
-                            <span class="link">
-                                <span class="ext-link"></span>
-                                <a target="_blank" class="clickable" href="http://github.com/mozilla/BrowserQuest"></a>
-                            </span>
+                          <br>
                         </div>
 	                    <div id="close-about">
 	                        <span>- click anywhere to close -</span>
