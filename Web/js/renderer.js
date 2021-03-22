@@ -555,7 +555,7 @@ function(Camera, Item, Character, Player, Timer) {
             this.context.save();
             if(entity.name && entity instanceof Player) {
                 var color = (entity.id === this.game.playerId) ? "#fcda5c" : "white";
-                this.drawText(entity.name,
+                this.drawText(entity.name.split("|",1),
                               (entity.x + 8) * this.scale,
                               (entity.y + entity.nameOffsetY) * this.scale,
                               true,

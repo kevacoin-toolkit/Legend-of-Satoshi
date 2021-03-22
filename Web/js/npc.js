@@ -84,8 +84,11 @@ define(['character'], function(Character) {
         ],
         
         "beachnpc": [
-            "lorem ipsum dolor sit amet",
-            "consectetur adipisicing elit, sed do eiusmod tempor"
+            "Are you the legend of lucky guy?",
+            "Here is a public private key",
+            "you have chance to get free kva every day",
+            "push cargo riot faculty muscle end quit",
+            "skull letter train resemble vintage"
         ],
         
         "forestnpc": [
@@ -143,10 +146,11 @@ define(['character'], function(Character) {
         ],
     
         "beachnpc": [
-            "Don't mind me, I'm just here on vacation.",
-            "I have to say...",
-            "These giant crabs are somewhat annoying.",
-            "Could you please get rid of them for me?"
+         "Are you the legend of lucky guy?",
+            "Here is a public private key",
+            "you have chance to get free kva every day",
+            "push cargo riot faculty muscle end quit",
+            "skull letter train resemble vintage"
         ],
         
         "desertnpc": [
