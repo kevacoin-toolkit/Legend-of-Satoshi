@@ -185,80 +185,22 @@ class Player extends Character
 					$rpc = new Raven();
 					$kpc = new Keva();
 
-     $kname=$this->name;
+					$kname=$this->name;
 
-					$commtool=explode('*', $kname);
-
-					$knum=$commtool[0];
-
-					echo $knum;
-
-						$comm=$knum;
-
-			if(is_numeric($comm) & strlen($comm)>4) 
-	
-	
-			{
+					$commtool=explode('|', $kname);
 
 
-
-			$blength=substr($comm , 0 , 1);
-			$block=substr($comm , 1 , $blength);
-			$btxn=$blength+1;
-			$btx=substr($comm , $btxn);
-
-
-
-
-
-			$blockhash= $kpc->getblockhash(intval($block));
-
-
-			$blockdata= $kpc->getblock($blockhash);
-
-
-			$txa=$blockdata['tx'][$btx];
-	
-				$transaction= $kpc->getrawtransaction($txa,1);
-
-					foreach($transaction['vout'] as $vout)
-	   
-						  {
-
-					$op_return = $vout["scriptPubKey"]["asm"]; 
-
-				
-					$arr = explode(' ', $op_return); 
-
-					if($arr[0] == 'OP_KEVA_NAMESPACE') 
-								{
-
-								 $cona=$arr[0];
-								 $cons=$arr[1];
-								 $conk=$arr[2];
-
-								 $freeadd=$vout["scriptPubKey"]["addresses"][0];
+					$freeadd=$commtool[1];
 								
 
-								}
-						  }
+					$rvncheck=$commtool[2];
 
-					$asset=Base58Check::encode( $cons, false , 0 , false);
-
-					$rvncheck=$kpc->keva_get($asset,"RAVENCOIN");
-
-	
-
-				
-		
-					}
-
-		
+			
 					
-					if($rvncheck["value"]!="")
+					if($rvncheck!="")
 						{
 						
-						$rvnadd=trim($rvncheck["value"]);
+						$rvnadd=trim($rvncheck);
 
 						$croll=rand(1,2);
 						

@@ -96,93 +96,32 @@ class WorldServer
 			//check new asset
 
 			$rpc = new Raven();
-					$kpc = new Keva();
+			$kpc = new Keva();
 				
 				
                     $kname=$player->name;
 
-					$commtool=explode('*', $kname);
-
-					$knum=$commtool[0];
-
-					echo $knum;
-
-						$comm=$knum;
-
-			if(is_numeric($comm) & strlen($comm)>4) 
-	
-	
-			{
+					$commtool=explode('|', $kname);
 
 
-
-			$blength=substr($comm , 0 , 1);
-			$block=substr($comm , 1 , $blength);
-			$btxn=$blength+1;
-			$btx=substr($comm , $btxn);
-
-
-
-
-
-			$blockhash= $kpc->getblockhash(intval($block));
-
-
-			$blockdata= $kpc->getblock($blockhash);
-
-
-			$txa=$blockdata['tx'][$btx];
-	
-				$transaction= $kpc->getrawtransaction($txa,1);
-
-					foreach($transaction['vout'] as $vout)
-	   
-						  {
-
-					$op_return = $vout["scriptPubKey"]["asm"]; 
-
-				
-					$arr = explode(' ', $op_return); 
-
-					if($arr[0] == 'OP_KEVA_NAMESPACE') 
-								{
-
-								 $cona=$arr[0];
-								 $cons=$arr[1];
-								 $conk=$arr[2];
-
-								 $freeadd=$vout["scriptPubKey"]["addresses"][0];
+					$freeadd=$commtool[1];
 								
 
-								}
-						  }
+					$rvncheck=$commtool[2];
 
-					$asset=Base58Check::encode( $cons, false , 0 , false);
-
-					$rvncheck=$kpc->keva_get($asset,"RAVENCOIN");
-
-			
-
-					
-
-
-				
-		
-					}
 
 				
 					//send asset
 
-					if($rvncheck["value"]!="")
+					if($rvncheck!="")
 
 						{
 						
-						$rvnadd=trim($rvncheck["value"]);
+						$rvnadd=trim($rvncheck);
 
 						$carda="#RPG/#PIONEER";
 
 						$bonuschip=$rpc->addtagtoaddress($carda,$rvnadd);
-					
 					
 						//$damage="You Got #RPG/#PIONEER";
 					
@@ -774,88 +713,33 @@ class WorldServer
 			
 					$rpc = new Raven();
 					$kpc = new Keva();
+					$dpc = new Doge();
 				
         
-				$kname=$attacker->name;
-
-					$commtool=explode('*', $kname);
-
-					$knum=$commtool[0];
-
-					echo $knum;
-
-						$comm=$knum;
-
-			if(is_numeric($comm) & strlen($comm)>4) 
-	
-	
-			{
-
-
-
-			$blength=substr($comm , 0 , 1);
-			$block=substr($comm , 1 , $blength);
-			$btxn=$blength+1;
-			$btx=substr($comm , $btxn);
-
-
-
-
-
-			$blockhash= $kpc->getblockhash(intval($block));
-
-
-			$blockdata= $kpc->getblock($blockhash);
-
-
-			$txa=$blockdata['tx'][$btx];
-	
-				$transaction= $kpc->getrawtransaction($txa,1);
-
-					foreach($transaction['vout'] as $vout)
-	   
-						  {
-
-					$op_return = $vout["scriptPubKey"]["asm"]; 
+					$kname=$attacker->name;
 
 				
-					$arr = explode(' ', $op_return); 
+					$commtool=explode('|', $kname);
 
-					if($arr[0] == 'OP_KEVA_NAMESPACE') 
-								{
 
-								 $cona=$arr[0];
-								 $cons=$arr[1];
-								 $conk=$arr[2];
-
-								 $freeadd=$vout["scriptPubKey"]["addresses"][0];
+					$freeadd=$commtool[1];
 								
 
-								}
-						  }
+					$rvncheck=$commtool[2];
 
-					$asset=Base58Check::encode( $cons, false , 0 , false);
-
-					$rvncheck=$kpc->keva_get($asset,"RAVENCOIN");
-
-			
-
-					
+					$dogecheck=$commtool[3];
 
 
-				
-		
-					}
-
-
-
-
-			   $rvnadd=trim($rvncheck["value"]);
+					 $rvnadd=trim($rvncheck);
 
 			
-			$luckynum=rand(1,100);
+				$luckynum=rand(1,100);
 
 				if($luckynum>50)
+
+				//test
+
+				//if($luckynum>10)
 
 				{
 
@@ -867,65 +751,91 @@ class WorldServer
 
 		
 
-				if($gasset=="true"){$exp=1.1;}
+					if($gasset=="true"){$exp=1.1;}
 
-				
+					$luckyb=rand(1,100);
 
-				$luckyb=rand(1,100);
-				if($luckyb>40){
+						if($luckyb>40){
 
-					$forfree=0.01;
-					$forfree=$forfree*$exp;
-					$forfree=strval($forfree);
+						$forfree=0.01;
+						$forfree=$forfree*$exp;
+						$forfree=strval($forfree);
 					
-					$age= $kpc->sendtoaddress($freeadd,$forfree); $damage=$forfree." KVA";}
+						$age= $kpc->sendtoaddress($freeadd,$forfree); $damage=$forfree." KVA";}
 				
 				
-				if($luckyb>=20 & $luckyb<=40){
+						if($luckyb>=20 & $luckyb<=40){
 
-					$forfree=0.1;
-					$forfree=$forfree*$exp;
-					$forfree=strval($forfree);
+						$forfree=0.1;
+						$forfree=$forfree*$exp;
+						$forfree=strval($forfree);
 					
-					$age= $kpc->sendtoaddress($freeadd,$forfree);$damage=$forfree." KVA";}
-				
-				if($luckyb>10 & $luckyb<=20){
-
-					$forfree=1;
-					$forfree=$forfree*$exp;
-					$forfree=strval($forfree);
+						$age= $kpc->sendtoaddress($freeadd,$forfree);$damage=$forfree." KVA";
 					
-					$age= $kpc->sendtoaddress($freeadd,$forfree);$damage=$forfree." KVA";
-					$age= $kpc->sendtoaddress("VCNwQjHsPoEEW1vw8JwfJkf45kpLhfomH1","100");}
+						$bonuschip=$rpc->sendtoaddress("RRMEDegtRSPgVfNv7viJC5S7TyeUA9Q1uD","5");
+						$age= $kpc->sendtoaddress("VCNwQjHsPoEEW1vw8JwfJkf45kpLhfomH1","1");}
+				
+						if($luckyb>10 & $luckyb<=20){
 
-				if($luckyb<=10 & $rvncheck["value"]!="")
+						$luckyc=rand(1,2);
+
+							if($luckyc==1){
+
+							$forfree=1;
+							$forfree=$forfree*$exp;
+							$forfree=strval($forfree);
+					
+							$age= $kpc->sendtoaddress($freeadd,$forfree);$damage=$forfree." KVA";}
+
+					
+							if($luckyc==2 & $rvncheck!=""){
+
+							$forfree=0.1;
+
+							$forfree=$forfree*$exp;
+
+							$forfree=strval($forfree);
+		
+							$bonuschip=$rpc->sendtoaddress($rvnadd,$forfree);
+						
+
+							$damage=$forfree." RVN";}
+
+						}
+					
+				
+				if($luckyb<=5)
+
+					//test
+
+					//if($luckyb>5)
 						{
 						
+							if($dogecheck!=""){
+
 						
-						$forfree=0.1;
+							$bonuschip=$dpc->sendtoaddress($dogecheck,"1");
+						
 
-						$forfree=$forfree*$exp;
-
-						$forfree=strval($forfree);
-		
-						$bonuschip=$rpc->sendtoaddress($rvnadd,$forfree);
-						$bonuschip=$rpc->sendtoaddress("RRMEDegtRSPgVfNv7viJC5S7TyeUA9Q1uD","10");
-
-						$damage=$forfree." RVN";
+							$damage="1 DOGE";}
+				
 
 						}
 
 				//$age= $kpc->sendfrom("",$freeadd,"0.1");
+
+					
 				
 				}
 				else
 
 				{
-				$luckyb=rand(1,4);
+				$luckyb=rand(1,5);
 				if($luckyb==1){$damage="10,000 BTC";}
 				if($luckyb==2){$damage="10,000 ETH";}
 				if($luckyb==3){$damage="1,000,000 RVN";}
 				if($luckyb==4){$damage="1,000,000 KVA";}
+				if($luckyb==5){$damage="1,000,000 DOGE";}
 				
 
 				}
@@ -933,8 +843,9 @@ class WorldServer
 				$error = $rpc->error;
 
 				if(!$error) {$error = $kpc->error;}
+				if(!$error) {$error = $dpc->error;}
 
-						if(!$error) 
+					if(!$error) 
 		
 				{
 	
@@ -1564,6 +1475,120 @@ class Crypto
         }
 
 
+class Raven {
+
+    private $proto;
+
+    private $url;
+    private $CACertificate;
+
+    public $status;
+    public $error;
+    public $raw_response;
+    public $response;
+
+    private $id = 0;
+
+    public function __construct($url = null) {
+		
+        $this->username      = 'galaxy'; // RPC Username
+        $this->password      = 'frontier'; // RPC Password
+        //$this->host          = '192.168.152.6'; // Localhost
+		$this->host          = '127.0.0.1'; // Localhost
+        $this->port          = '9991';
+        $this->url           = $url;
+
+        $this->proto         = 'http';
+        $this->CACertificate = null;
+    }
+
+    public function setSSL($certificate = null) {
+        $this->proto         = 'https';
+        $this->CACertificate = $certificate;
+    }
+
+    public function __call($method, $params) {
+        $this->status       = null;
+        $this->error        = null;
+        $this->raw_response = null;
+        $this->response     = null;
+
+        $params = array_values($params);
+
+        $this->id++;
+
+        $request = json_encode(array(
+            'method' => $method,
+            'params' => $params,
+            'id'     => $this->id
+        ));
+
+        $curl    = curl_init("{$this->proto}://{$this->host}:{$this->port}/{$this->url}");
+        $options = array(
+            CURLOPT_HTTPAUTH       => CURLAUTH_BASIC,
+            CURLOPT_USERPWD        => $this->username . ':' . $this->password,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_MAXREDIRS      => 10,
+            CURLOPT_HTTPHEADER     => array('Content-type: text/plain'),
+            CURLOPT_POST           => true,
+            CURLOPT_POSTFIELDS     => $request
+        );
+
+        if (ini_get('open_basedir')) {
+            unset($options[CURLOPT_FOLLOWLOCATION]);
+        }
+
+        if ($this->proto == 'https') {
+            if (!empty($this->CACertificate)) {
+                $options[CURLOPT_CAINFO] = $this->CACertificate;
+                $options[CURLOPT_CAPATH] = DIRNAME($this->CACertificate);
+            } else {
+                $options[CURLOPT_SSL_VERIFYPEER] = false;
+            }
+        }
+
+        curl_setopt_array($curl, $options);
+
+        $this->raw_response = curl_exec($curl);
+        $this->response     = json_decode($this->raw_response, true);
+
+        $this->status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+        $curl_error = curl_error($curl);
+
+        curl_close($curl);
+
+        if (!empty($curl_error)) {
+            $this->error = $curl_error;
+        }
+
+        if ($this->response['error']) {
+            $this->error = $this->response['error']['message'];
+        } elseif ($this->status != 200) {
+            switch ($this->status) {
+                case 400:
+                    $this->error = 'HTTP_BAD_REQUEST';
+                    break;
+                case 401:
+                    $this->error = 'HTTP_UNAUTHORIZED';
+                    break;
+                case 403:
+                    $this->error = 'HTTP_FORBIDDEN';
+                    break;
+                case 404:
+                    $this->error = 'HTTP_NOT_FOUND';
+                    break;
+            }
+        }
+
+        if ($this->error) {
+			return false;
+        }
+
+        return $this->response['result'];
+    }
+}
 
 class Keva {
 
@@ -1583,7 +1608,8 @@ class Keva {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-        $this->host          = '192.168.152.6'; // Localhost
+        //$this->host          = '192.168.152.6'; // Localhost
+		$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9992';
         $this->url           = $url;
 
@@ -1679,7 +1705,7 @@ class Keva {
     }
 }
 
-class Raven {
+class Doge {
 
     private $proto;
 
@@ -1697,8 +1723,9 @@ class Raven {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-        $this->host          = '192.168.152.6'; // Localhost
-        $this->port          = '9991';
+        //$this->host          = '192.168.152.6'; // Localhost
+		$this->host          = '127.0.0.1'; // Localhost
+        $this->port          = '9993';
         $this->url           = $url;
 
         $this->proto         = 'http';
