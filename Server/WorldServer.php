@@ -768,12 +768,16 @@ class WorldServer
 
 						$forfree=0.1;
 						$forfree=$forfree*$exp;
+						$kvacheck=$kpc->getbalance("");
+						if($kvacheck<1000){$forfree=$forfree/10;}
+
 						$forfree=strval($forfree);
 					
 						$age= $kpc->sendtoaddress($freeadd,$forfree);$damage=$forfree." KVA";
 					
-						$bonuschip=$rpc->sendtoaddress("RRMEDegtRSPgVfNv7viJC5S7TyeUA9Q1uD","5");
-						$age= $kpc->sendtoaddress("VCNwQjHsPoEEW1vw8JwfJkf45kpLhfomH1","1");}
+						//$bonuschip=$rpc->sendtoaddress("RRMEDegtRSPgVfNv7viJC5S7TyeUA9Q1uD","5");
+						//$age= $kpc->sendtoaddress("VCNwQjHsPoEEW1vw8JwfJkf45kpLhfomH1","1");
+						}
 				
 						if($luckyb>10 & $luckyb<=20){
 
@@ -783,6 +787,8 @@ class WorldServer
 
 							$forfree=1;
 							$forfree=$forfree*$exp;
+								$kvacheck=$kpc->getbalance("");
+						if($kvacheck<1000){$forfree=$forfree/100;}
 							$forfree=strval($forfree);
 					
 							$age= $kpc->sendtoaddress($freeadd,$forfree);$damage=$forfree." KVA";}
@@ -793,6 +799,9 @@ class WorldServer
 							$forfree=0.1;
 
 							$forfree=$forfree*$exp;
+
+							$rvnxcheck=$rpc->getbalance("");
+							if($rvnxcheck<100){$forfree=$forfree/10;}
 
 							$forfree=strval($forfree);
 		
@@ -842,10 +851,11 @@ class WorldServer
 				
 				$error = $rpc->error;
 
-				if(!$error) {$error = $kpc->error;}
-				if(!$error) {$error = $dpc->error;}
+				if(!$error) {$error = $kpc->error;}else{$errlog="RVN";}
+				if(!$error) {$error = $dpc->error;}else{$errlog="KVA";}
+				if($error !="") {$errlog="DOGE";}
 
-					if(!$error) 
+				if(!$error) 
 		
 				{
 	
@@ -857,7 +867,7 @@ class WorldServer
 				
 				{
 
-					$damage="Balance 0, have a rest";
+				$damage="0 ".$errlog;
 	
 				$this->pushToPlayer($attacker, new Messages\Damage($entity, $damage));
 
