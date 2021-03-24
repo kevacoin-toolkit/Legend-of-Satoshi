@@ -142,8 +142,8 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
 						 Server in Maintenance and Upgrading...サーバーのメンテナンス ...서버 유지 관리 服务器正在升级维护 обслуживание сервера 
 						 
                          
-
-					  --> 							
+  --> 
+										
 						
 
 						
@@ -152,7 +152,7 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
 						 <input type="text" id="nameinputx" class="stroke" name="player-namex"  value="<?php echo $in; ?>" readonly="readonly">
                              <input type="hidden" id="nameinput" class="stroke" name="player-name"  value="<?php echo $serv; ?>" readonly="readonly">
                          </form>
-
+		
                          <div class="play button disabled">
                              <div></div>
                              <img src="img/common/spinner.gif" alt="">
@@ -232,20 +232,26 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
         	            <h1>
          	               <span class="left-ornament"></span>
          	               <span class="title">
-         	                   What is Legend of Satoshi?
+         	                   Legend of Satoshi
          	               </span>
          	               <span class="right-ornament"></span>
                         </h1>
-                        <p id="game-desc">
-                            Legend of Satoshi is a multiplayer game inviting you to explore a
-                            world of blockchain from your Web browser.
-                        </p>
+                       <br>
                         <div class="left">
                             
                             <p>
-							
-								COMMAND<br><br>
-                               /afk keep you online.
+	
+							   /0 like<br>
+                               /afk keep you online<br>
+                               /check rvn/doge/btc address<br>
+							   /coin address balance link<br>
+							   /nft NFTs list link<br>
+							   /space namespace link<br>
+							   /kva server balance<br>
+							   /rvn server balance<br>
+							   /doge server balance<br>
+							   
+						
                             </p>
 
 							
