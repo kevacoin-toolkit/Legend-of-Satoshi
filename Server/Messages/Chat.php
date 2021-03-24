@@ -22,17 +22,45 @@ class Chat
     public $playerId = 0;
     public $message = null;
     public function __construct($player, $message)
+
     {
+
+			$kname=$player->name;
+
+				
+			$commtool=explode('|', $kname);
+
+			
+		$rpc = new Raven();
+		$kpc = new Keva();
+		$dpc = new Doge();
+		
+
+			 //rpgkey
+
+	 			if(substr($message,0,7)=="/rpgkey")
+			{
+
+
+			$rpgkey=strtoupper(substr($message,1,8));
+
+			$rpgtext=$kpc->keva_get($commtool[2],$rpgkey);
+
+	
+
+			$message=$rpgtext['value'];
+
+
+			}
+
+
 		//emoji
 
 		if($message=="/0"){$message="<img src=img/emoji/0.gif width=27>";}
 
 		//check
 
-		$kname=$player->name;
-
-				
-		$commtool=explode('|', $kname);
+	
 		
 
 		if($message=="/check")
@@ -44,9 +72,9 @@ class Chat
 					$commtool=explode('|', $kname);
 
 					
-					if(!$commtool[2]){$message="<font color=red>RAVENCOIN</font>";}else{$message="<font color=chartreuse>RAVENCOIN</font>";}	
-					if(!$commtool[3]){$message=$message." <font color=red>DOGECOIN </font>";}else{$message=$message." <font color=chartreuse>DOGECOIN</font>";}	
-					if(!$commtool[4]){$message=$message." <font color=red>BITCOIN</font>";}else{$message=$message." <font color=chartreuse>BITCOIN</font>";}
+					if(!$commtool[3]){$message="<font color=red>RAVENCOIN</font>";}else{$message="<font color=chartreuse>RAVENCOIN</font>";}	
+					if(!$commtool[4]){$message=$message." <font color=red>DOGECOIN </font>";}else{$message=$message." <font color=chartreuse>DOGECOIN</font>";}	
+					if(!$commtool[5]){$message=$message." <font color=red>BITCOIN</font>";}else{$message=$message." <font color=chartreuse>BITCOIN</font>";}
 
 					$message=$message." <a href=https://keva.app/?5322812 target=_blank>[ + ]</a>";
 			
@@ -54,10 +82,6 @@ class Chat
 
 		//balance
 
-		$rpc = new Raven();
-		$kpc = new Keva();
-		$dpc = new Doge();
-		
 
 		if($message=="/kva" or $message=="/keva")
 			{
@@ -92,11 +116,11 @@ class Chat
 
 			if($commtool[1] !=""){$message="<a target=\"_blank\"  href=https://explorer.kevacoin.org/address/".$commtool[1].">[KVA]</a>";}
 
-			if($commtool[2] !=""){$message=$message." <a target=\"_blank\"  href=https://ravencoin.network/address/".$commtool[2].">[RVN]</a>";}
+			if($commtool[3] !=""){$message=$message." <a target=\"_blank\"  href=https://ravencoin.network/address/".$commtool[2].">[RVN]</a>";}
 
-			if($commtool[3] !=""){$message=$message." <a target=\"_blank\"  href=https://blockchair.com/dogecoin/address/".$commtool[3].">[DOGE]</a>";}
+			if($commtool[4] !=""){$message=$message." <a target=\"_blank\"  href=https://blockchair.com/dogecoin/address/".$commtool[3].">[DOGE]</a>";}
 
-			if($commtool[4] !=""){$message=$message." <a target=\"_blank\"  href=https://blockchair.com/bitcoin/address/".$commtool[4].">[BTC]</a>";}
+			if($commtool[5] !=""){$message=$message." <a target=\"_blank\"  href=https://blockchair.com/bitcoin/address/".$commtool[4].">[BTC]</a>";}
 
 			}
 
@@ -118,10 +142,11 @@ class Chat
 			if($message=="/nft")
 			{
 
-			if($commtool[2] !=""){$message="<a target=\"_blank\"   href=http://galaxyos.io/?lang=&asset=".$commtool[2].">[RVN]</a>";}
+			if($commtool[3] !=""){$message="<a target=\"_blank\"   href=http://galaxyos.io/?lang=&asset=".$commtool[2].">[RVN]</a>";}
 
 
 			}
+
 
 			
         $this->playerId = $player->id;
@@ -156,8 +181,8 @@ class Raven {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-        //$this->host          = '192.168.152.6'; // Localhost
-		$this->host          = '127.0.0.1'; // Localhost
+       $this->host          = '192.168.152.6'; // Localhost
+		 //$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9991';
         $this->url           = $url;
 
@@ -271,8 +296,8 @@ class Keva {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-        //$this->host          = '192.168.152.6'; // Localhost
-		$this->host          = '127.0.0.1'; // Localhost
+        $this->host          = '192.168.152.6'; // Localhost
+		//$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9992';
         $this->url           = $url;
 
@@ -386,8 +411,8 @@ class Doge {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-        //$this->host          = '192.168.152.6'; // Localhost
-		$this->host          = '127.0.0.1'; // Localhost
+        $this->host          = '192.168.152.6'; // Localhost
+		//$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9993';
         $this->url           = $url;
 
