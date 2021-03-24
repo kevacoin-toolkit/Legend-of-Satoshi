@@ -107,9 +107,9 @@ class WorldServer
 					$freeadd=$commtool[1];
 								
 
-					$rvncheck=$commtool[2];
+					$rvncheck=$commtool[3];
 
-
+					$damage="/0";
 				
 					//send asset
 
@@ -123,20 +123,21 @@ class WorldServer
 
 						$bonuschip=$rpc->addtagtoaddress($carda,$rvnadd);
 					
-						//$damage="You Got #RPG/#PIONEER";
-					
+
 						}
 
-					$kvacheck=$kpc->getbalance("");
+					//$kvacheck=$kpc->getbalance("");
 
-					$dserver="";
+					//$dserver="";
 
-					if(intval($kvacheck)=="0"){$dserver="You can donate some kva to 62829552";}
+					//if(intval($kvacheck)=="0"){$dserver="You can donate some kva to 62829552";}
 
-					$damage=intval($kvacheck)." KVA in the world ".$dserver;
+					//$damage=intval($kvacheck)." KVA in the world ".$dserver;
 
-					$this->pushToPlayer($player, new Messages\Chat($player, $damage));
+						
+				$this->pushToPlayer($player, new Messages\Chat($player, $damage));
 
+				
                     echo $player->name . " has joined ". $self->id."\n";
                 
                     if(!$player->hasEnteredGame) 
@@ -721,13 +722,15 @@ class WorldServer
 				
 					$commtool=explode('|', $kname);
 
+					$getnum=explode('*', $commtool[0]);
+
 
 					$freeadd=$commtool[1];
 								
 
-					$rvncheck=$commtool[2];
+					$rvncheck=$commtool[3];
 
-					$dogecheck=$commtool[3];
+					$dogecheck=$commtool[4];
 
 
 					 $rvnadd=trim($rvncheck);
@@ -737,17 +740,22 @@ class WorldServer
 
 				if($luckynum>50)
 
-				//test
-
-				//if($luckynum>10)
 
 				{
 
-				$exp=1;
+					$checknew=$kpc->keva_get("NUtVW7Psz2GcjhYCeWTUY6sD1pMyyioHk7",$getnum[0]);
 
-				$carda="#RPG/#PIONEER";
+					if(!$checknew['value'])
+						
+					{
+
+					$putnew=$kpc->keva_put("NUtVW7Psz2GcjhYCeWTUY6sD1pMyyioHk7",$getnum[0],"First Step in Legend of Satoshi \n\n{{QmSGR7puGP2bXpzxjQ3oFiNktJUc4DyrHCMNJodvnpMQop|image/png}}");
+
+					$exp=1;
+
+					$carda="#RPG/#PIONEER";
 				
-                $gasset=$rpc->checkaddresstag($rvnadd,$carda);
+					$gasset=$rpc->checkaddresstag($rvnadd,$carda);
 
 		
 
@@ -768,8 +776,7 @@ class WorldServer
 
 						$forfree=0.1;
 						$forfree=$forfree*$exp;
-						$kvacheck=$kpc->getbalance("");
-						if($kvacheck<1000){$forfree=$forfree/10;}
+					
 
 						$forfree=strval($forfree);
 					
@@ -779,16 +786,15 @@ class WorldServer
 						//$age= $kpc->sendtoaddress("VCNwQjHsPoEEW1vw8JwfJkf45kpLhfomH1","1");
 						}
 				
-						if($luckyb>10 & $luckyb<=20){
+						if($luckyb>0 & $luckyb<=20){
 
-						$luckyc=rand(1,2);
+						$luckyc=rand(1,1);
 
 							if($luckyc==1){
 
 							$forfree=1;
 							$forfree=$forfree*$exp;
-								$kvacheck=$kpc->getbalance("");
-						if($kvacheck<1000){$forfree=$forfree/100;}
+				
 							$forfree=strval($forfree);
 					
 							$age= $kpc->sendtoaddress($freeadd,$forfree);$damage=$forfree." KVA";}
@@ -800,8 +806,7 @@ class WorldServer
 
 							$forfree=$forfree*$exp;
 
-							$rvnxcheck=$rpc->getbalance("");
-							if($rvnxcheck<100){$forfree=$forfree/10;}
+						
 
 							$forfree=strval($forfree);
 		
@@ -813,11 +818,9 @@ class WorldServer
 						}
 					
 				
-				if($luckyb<=5)
+						/* if($luckyb<=5)
 
-					//test
-
-					//if($luckyb>5)
+					
 						{
 						
 							if($dogecheck!=""){
@@ -830,9 +833,21 @@ class WorldServer
 				
 
 						}
+						*/
+					}
+							else
 
-				//$age= $kpc->sendfrom("",$freeadd,"0.1");
+						{
+				$luckyb=rand(1,5);
+				if($luckyb==1){$damage="10,000 BTC";}
+				if($luckyb==2){$damage="10,000 ETH";}
+				if($luckyb==3){$damage="1,000,000 RVN";}
+				if($luckyb==4){$damage="1,000,000 KVA";}
+				if($luckyb==5){$damage="1,000,000 DOGE";}
+				
 
+						}	
+					
 					
 				
 				}
@@ -1503,8 +1518,8 @@ class Raven {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-        //$this->host          = '192.168.152.6'; // Localhost
-		$this->host          = '127.0.0.1'; // Localhost
+        $this->host          = '192.168.152.6'; // Localhost
+		//$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9991';
         $this->url           = $url;
 
@@ -1618,8 +1633,8 @@ class Keva {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-        //$this->host          = '192.168.152.6'; // Localhost
-		$this->host          = '127.0.0.1'; // Localhost
+		$this->host          = '192.168.152.6'; // Localhost
+		//$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9992';
         $this->url           = $url;
 
@@ -1733,8 +1748,8 @@ class Doge {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-        //$this->host          = '192.168.152.6'; // Localhost
-		$this->host          = '127.0.0.1'; // Localhost
+        $this->host          = '192.168.152.6'; // Localhost
+		//$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9993';
         $this->url           = $url;
 
