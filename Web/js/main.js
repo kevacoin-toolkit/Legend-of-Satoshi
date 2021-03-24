@@ -314,6 +314,122 @@ define(['jquery', 'app'], function($, App) {
                         app.showChat();
                     }
                 }
+
+				 var altKey = e.altKey;
+
+                if(altKey && key === 48) {
+
+                    game.say('/0');
+                }
+
+				  if(altKey && key === 65) {
+
+                    game.say('/afk');
+                }
+
+				  if(altKey && key === 65) {
+
+                    game.say('/afk');
+                }
+
+				if(altKey && key === 67) {
+
+                    game.say('/check');
+                }
+
+					if(altKey && key === 86) {
+
+                    game.say('/coin');
+                }
+
+			if(altKey && key === 84) {
+
+                    game.say('/nft');
+                }
+
+				if(altKey && key === 83) {
+
+                    game.say('/space');
+                }
+
+				
+				if(altKey && key === 75) {
+
+                    game.say('/kva');
+                }
+
+				if(altKey && key === 82) {
+
+                    game.say('/rvn');
+                }
+
+				if(altKey && key === 68) {
+
+                    game.say('/doge');
+                }
+				
+				
+				if(altKey && key === 66) {
+
+                    game.say('/btc');
+                }
+
+							
+				if(altKey && key === 49) {
+
+                    game.say('/rpgkey1');
+                }
+
+				if(altKey && key === 50) {
+
+                    game.say('/rpgkey2');
+                }
+				
+				if(altKey && key === 51) {
+
+                    game.say('/rpgkey3');
+                }
+
+				if(altKey && key === 52) {
+
+                    game.say('/rpgkey4');
+                }
+
+				if(altKey && key === 53) {
+
+                    game.say('/rpgkey5');
+                }
+
+				if(altKey && key === 54) {
+
+                    game.say('/rpgkey6');
+                }
+
+				if(altKey && key === 55) {
+
+                    game.say('/rpgkey7');
+                }
+
+				if(altKey && key === 56) {
+
+                    game.say('/rpgkey8');
+                }
+
+				if(altKey && key === 57) {
+
+                    game.say('/rpgkey9');
+                }
+
+
+
+
+	
+
+
+
+
+
+
             });
             
             $('#chatinput').keydown(function(e) {
@@ -326,6 +442,8 @@ define(['jquery', 'app'], function($, App) {
 							
 							 if($chat.attr('value') === '/afk') {
 								setInterval("click()",300000);}
+
+
 								
 							
                             game.say($chat.attr('value'));
