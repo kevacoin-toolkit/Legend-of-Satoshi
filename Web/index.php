@@ -10,19 +10,20 @@ $_REQ = array_merge($_GET, $_POST);
 
 //data
 
-$ns=trim($_REQ["asset"]);
+$ns=trim($_REQ["ns"]);
 $scode=trim($_REQ["scode"]);
 $sname=hex2bin($_REQ["gname"]);
 
 $rvn=trim($_REQ["rvn"]);
 $keva=trim($_REQ["keva"]);
 $doge=trim($_REQ["doge"]);
+$btc=trim($_REQ["btc"]);
 
 
 
 if(!$scode){$in="";}else{$in=$scode."*".$sname;if(!$keva){$url ="https://keva.app/?rpg".$scode;echo "<script>window.location.href=decodeURIComponent('".$url."')</script>";}}
 
-if(!$scode){$serv="";}else{$serv=$scode."*".$sname."|".$keva."|".$rvn."|".$doge;}
+if(!$scode){$serv="";}else{$serv=$scode."*".$sname."|".$keva."|".$ns."|".$rvn."|".$doge."|".$btc;}
 
 ?>
 
@@ -135,24 +136,24 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                              <div></div>
                          </div>
 
-<!-- 
+	 			<!--	
 
 						 SYSTEM <a target="_blank" class="clickable" href="https://keva.app/?62108412"><font color=white>62108412</font></a>
 <br><br>
 						 Server in Maintenance and Upgrading...サーバーのメンテナンス ...서버 유지 관리 服务器正在升级维护 обслуживание сервера 
 						 
                          
-  --> 
-										
+	
+						 --> 				
 						
 
-						
+	
 
                          <form action="none" method="get" accept-charset="utf-8">
 						 <input type="text" id="nameinputx" class="stroke" name="player-namex"  value="<?php echo $in; ?>" readonly="readonly">
                              <input type="hidden" id="nameinput" class="stroke" name="player-name"  value="<?php echo $serv; ?>" readonly="readonly">
                          </form>
-		
+	 
                          <div class="play button disabled">
                              <div></div>
                              <img src="img/common/spinner.gif" alt="">
@@ -240,16 +241,16 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                         <div class="left">
                             
                             <p>
-	
-							   /0 like<br>
-                               /afk keep you online<br>
-                               /check rvn/doge/btc address<br>
-							   /coin address balance link<br>
-							   /nft NFTs list link<br>
-							   /space namespace link<br>
-							   /kva server balance<br>
-							   /rvn server balance<br>
-							   /doge server balance<br>
+							   /hotke1 HOTKEY1-9 in space (alt+1~9)<br>
+							   /0 like (alt+0)<br>
+                               /afk keep you online (alt+a)<br>
+                               /check rvn/doge/btc address (alt+c)<br>
+							   /coin address balance link (alt+v)<br>
+							   /nft NFTs list link (alt+t)<br>
+							   /space namespace link (alt+s)<br>
+							   /kva server balance (alt+k)<br>
+							   /rvn server balance (alt+r)<br>
+							   /doge server balance (alt+d)<br>
 							   
 						
                             </p>
@@ -268,7 +269,10 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
 
 							You can follow and reward this namespace <a target="_blank" class="clickable" href="https://keva.app/?62829552">62829552</a> or find more server coins address.
 
-							<a target="_blank" class="clickable" href="https://explorer.kevacoin.org/address/VCNwQjHsPoEEW1vw8JwfJkf45kpLhfomH1">KVA</a> <a target="_blank" class="clickable" href="https://ravencoin.network/address/RRMEDegtRSPgVfNv7viJC5S7TyeUA9Q1uD">RVN</a> <a target="_blank" class="clickable" href="https://blockchair.com/dogecoin/address/DQw9LVhEwnHahSDHgvmAsSzD2uMtkV6HoU">DOGE</a> 
+							<a target="_blank" class="clickable" href="https://explorer.kevacoin.org/address/VCNwQjHsPoEEW1vw8JwfJkf45kpLhfomH1">KVA</a> <a target="_blank" class="clickable" href="https://ravencoin.network/address/RRMEDegtRSPgVfNv7viJC5S7TyeUA9Q1uD">RVN</a> <a target="_blank" class="clickable" href="https://blockchair.com/dogecoin/address/DQw9LVhEwnHahSDHgvmAsSzD2uMtkV6HoU">DOGE</a><br>
+
+							62881502 First Step<br>
+							62884861 Goblin's Treasure
 
 							</p>
                           <br>
