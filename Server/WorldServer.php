@@ -473,6 +473,8 @@ class WorldServer
         $entity->destroy();
         $this->removeFromGroups($entity);
         echo "Removed " .Types::getKindAsString($entity->kind) ." : ". $entity->id."\n";
+
+	
     }
     
     public function addPlayer($player) 
@@ -724,26 +726,32 @@ class WorldServer
 
 					$getnum=explode('*', $commtool[0]);
 
-
 					$freeadd=$commtool[1];
 								
-
 					$rvncheck=$commtool[3];
 
 					$dogecheck=$commtool[4];
 
+					$rvnadd=trim($rvncheck);
 
-					 $rvnadd=trim($rvncheck);
-
-			
-				$luckynum=rand(1,100);
-
-				if($luckynum>50)
-
-
-				{
-
+					//check
+	
 					$checknew=$kpc->keva_get("NUtVW7Psz2GcjhYCeWTUY6sD1pMyyioHk7",$getnum[0]);
+
+					$mon=Types::getKindAsString($entity->kind);
+					
+					$exp=1;
+
+					$carda="#RPG/#PIONEER";
+				
+					$gasset=$rpc->checkaddresstag($rvnadd,$carda);
+
+					if($gasset=="true"){$exp=1.1;}
+
+					$damage="";
+					$error="";
+
+					//first
 
 					if(!$checknew['value'])
 						
@@ -751,132 +759,81 @@ class WorldServer
 
 					$putnew=$kpc->keva_put("NUtVW7Psz2GcjhYCeWTUY6sD1pMyyioHk7",$getnum[0],"First Step in Legend of Satoshi \n\n{{QmSGR7puGP2bXpzxjQ3oFiNktJUc4DyrHCMNJodvnpMQop|image/png}}");
 
-					$exp=1;
+					$putnew=$kpc->keva_put("NWn2wUdctLvoatDuqFmcfxEuJmFx9EbSre",$getnum[0],$mon);
 
-					$carda="#RPG/#PIONEER";
-				
-					$gasset=$rpc->checkaddresstag($rvnadd,$carda);
-
-		
-
-					if($gasset=="true"){$exp=1.1;}
-
-					$luckyb=rand(1,100);
-
-						if($luckyb>40){
 
 						$forfree=0.01;
 						$forfree=$forfree*$exp;
 						$forfree=strval($forfree);
 					
-						$age= $kpc->sendtoaddress($freeadd,$forfree); $damage=$forfree." KVA";}
+						$age= $kpc->sendtoaddress($freeadd,$forfree); $damage=$forfree." KVA, My First Step";
 				
-				
-						if($luckyb>=20 & $luckyb<=40){
+						$error = $kpc->error;
 
-						$forfree=0.1;
-						$forfree=$forfree*$exp;
+						if($error !="") {$errlog="KVA";}
+					}
+
+						
+				//goblin treasure
+				
+
+				if($mon=="goblin")
 					
+					{
+					
+					$luckyb=rand(1,6);
+					if($luckyb==1){$damage="10,000 BTC";}
+					if($luckyb==2){$damage="10,000 ETH";}
+					if($luckyb==3){$damage="1,000,000 RVN";}
+					if($luckyb==4){$damage="1,000,000 KVA";}
+					if($luckyb==5){$damage="1,000,000 DOGE";}
+					if($luckyb==6){
+						$checknew=$kpc->keva_get("NLbbLeVppyVEMKd5LocLSXEdjaDReaq87z",$getnum[0]);
+						if(!$checknew['value']){
+						$putnew=$kpc->keva_put("NLbbLeVppyVEMKd5LocLSXEdjaDReaq87z",$getnum[0],"Goblin's Treasure in Legend of Satoshi \n\n{{QmWfCec74cpPS9t3JGoxwMyw4bsLodBdy8hwF8AhXoTU9v|image/png}}");
 
+						$damage="I found goblin's secret";}
+						}
+					
+					}
+
+					//check mon
+
+					$checknew=$kpc->keva_get("NWn2wUdctLvoatDuqFmcfxEuJmFx9EbSre",$getnum[0]);
+
+					if(stristr($checknew['value'],$mon) == false){
+
+						$monadd=$checknew['value'].",".$mon;
+						$putnew=$kpc->keva_put("NWn2wUdctLvoatDuqFmcfxEuJmFx9EbSre",$getnum[0],	$monadd);
+
+						$forfree=rand(1,9);
+						$forfree=$forfree*$exp/100;
 						$forfree=strval($forfree);
 					
-						$age= $kpc->sendtoaddress($freeadd,$forfree);$damage=$forfree." KVA";
-					
-						//$bonuschip=$rpc->sendtoaddress("RRMEDegtRSPgVfNv7viJC5S7TyeUA9Q1uD","5");
-						//$age= $kpc->sendtoaddress("VCNwQjHsPoEEW1vw8JwfJkf45kpLhfomH1","1");
-						}
+						$age= $kpc->sendtoaddress($freeadd,$forfree); $damage=$forfree." KVA";
 				
-						if($luckyb>0 & $luckyb<=20){
+						$error = $kpc->error;
 
-						$luckyc=rand(1,1);
-
-							if($luckyc==1){
-
-							$forfree=1;
-							$forfree=$forfree*$exp;
-				
-							$forfree=strval($forfree);
+						if($error !="") {$errlog="KVA";}
 					
-							$age= $kpc->sendtoaddress($freeadd,$forfree);$damage=$forfree." KVA";}
-
-					
-							if($luckyc==2 & $rvncheck!=""){
-
-							$forfree=0.1;
-
-							$forfree=$forfree*$exp;
-
-						
-
-							$forfree=strval($forfree);
-		
-							$bonuschip=$rpc->sendtoaddress($rvnadd,$forfree);
-						
-
-							$damage=$forfree." RVN";}
-
-						}
-					
-				
-						/* if($luckyb<=5)
-
-					
-						{
-						
-							if($dogecheck!=""){
-
-						
-							$bonuschip=$dpc->sendtoaddress($dogecheck,"1");
-						
-
-							$damage="1 DOGE";}
-				
-
-						}
-						*/
 					}
-							else
 
-						{
-				$luckyb=rand(1,5);
-				if($luckyb==1){$damage="10,000 BTC";}
-				if($luckyb==2){$damage="10,000 ETH";}
-				if($luckyb==3){$damage="1,000,000 RVN";}
-				if($luckyb==4){$damage="1,000,000 KVA";}
-				if($luckyb==5){$damage="1,000,000 DOGE";}
 				
 
-						}	
-					
-					
-				
-				}
-				else
-
-				{
-				$luckyb=rand(1,5);
-				if($luckyb==1){$damage="10,000 BTC";}
-				if($luckyb==2){$damage="10,000 ETH";}
-				if($luckyb==3){$damage="1,000,000 RVN";}
-				if($luckyb==4){$damage="1,000,000 KVA";}
-				if($luckyb==5){$damage="1,000,000 DOGE";}
-				
-
-				}
-				
-				$error = $rpc->error;
-
-				if(!$error) {$error = $kpc->error;}else{$errlog="RVN";}
-				if(!$error) {$error = $dpc->error;}else{$errlog="KVA";}
-				if($error !="") {$errlog="DOGE";}
+		
 
 				if(!$error) 
 		
 				{
+
+				//$damage=Types::getKindAsString($entity->kind);
+
+				if($damage !=""){
 	
 				$this->pushToPlayer($attacker, new Messages\Damage($entity, $damage));
 
 				$this->pushToPlayer($attacker, new Messages\Chat($attacker, $damage));
+				}
 				}
 				else
 				
@@ -887,6 +844,7 @@ class WorldServer
 				$this->pushToPlayer($attacker, new Messages\Damage($entity, $damage));
 
 				$this->pushToPlayer($attacker, new Messages\Chat($attacker, $damage));
+
 				}
 
 
@@ -1748,7 +1706,7 @@ class Doge {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-        $this->host          = '192.168.152.6'; // Localhost
+		$this->host          = '192.168.152.6'; // Localhost
 		//$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9993';
         $this->url           = $url;
