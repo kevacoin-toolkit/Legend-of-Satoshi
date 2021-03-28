@@ -30,6 +30,8 @@ class Chat
 				
 			$commtool=explode('|', $kname);
 
+			$getnum=explode('*', $commtool[0]);
+
 			
 		$rpc = new Raven();
 		$kpc = new Keva();
@@ -46,10 +48,65 @@ class Chat
 
 			$rpgtext=$kpc->keva_get($commtool[2],$rpgkey);
 
-	
+			$giftasset=$rpc->listassetbalancesbyaddress($commtool[3]);
+
+			$gifttag=$rpc->listtagsforaddress($commtool[3]);
 
 			$message=$rpgtext['value'];
 
+
+		
+
+			if(array_key_exists($rpgtext['value'],$giftasset))
+				{
+
+				$listinfo = $rpc->getassetdata($rpgtext['value']);
+			
+					$message="<a href=\"https://ravencoin.asset-explorer.net/ipfs/".$listinfo["ipfs_hash"]."\"><img src=https://ravencoin.asset-explorer.net/ipfs/".$listinfo["ipfs_hash"]." width=50></a>";
+				}
+
+			if(in_array($rpgtext['value'],$gifttag))
+				{
+
+				$listinfo = $rpc->getassetdata($rpgtext['value']);
+			
+					$message="<a href=\"https://ravencoin.asset-explorer.net/ipfs/".$listinfo["ipfs_hash"]."\"><img src=https://ravencoin.asset-explorer.net/ipfs/".$listinfo["ipfs_hash"]." width=50></a>";
+				}
+
+				
+
+			
+				if(in_array($rpgtext['value'],$gifttag))
+				{
+
+				$listinfo = $rpc->getassetdata($rpgtext['value']);
+			
+					$message="<a href=\"https://ravencoin.asset-explorer.net/ipfs/".$listinfo["ipfs_hash"]."\"><img src=https://ravencoin.asset-explorer.net/ipfs/".$listinfo["ipfs_hash"]." width=50></a>";
+				}
+			
+			if(is_numeric($rpgtext['value']))
+
+				{
+				
+				if($rpgtext['value']=="62881502"){
+				
+				$rpgnft=$kpc->keva_get("NUtVW7Psz2GcjhYCeWTUY6sD1pMyyioHk7",$getnum[0]);}
+
+				if($rpgtext['value']=="62884861"){
+				
+				$rpgnft=$kpc->keva_get("NLbbLeVppyVEMKd5LocLSXEdjaDReaq87z",$getnum[0]);}
+
+				if($rpgnft['value'] !=""){
+					
+					$rpgimg="KEVA.APP/RPG#".$rpgtext['value'];
+
+					$listinfo = $rpc->getassetdata($rpgimg);
+					
+					$message="<a href=\"https://ravencoin.asset-explorer.net/ipfs/".$listinfo["ipfs_hash"]."\"><img src=https://ravencoin.asset-explorer.net/ipfs/".$listinfo["ipfs_hash"]." width=50></a>"; }
+				
+
+				}
+			
 
 			}
 
