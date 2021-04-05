@@ -104,13 +104,13 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
 
 							62829552
 
-							<a target="_blank" class="clickable" href="https://explorer.kevacoin.org/address/VCNwQjHsPoEEW1vw8JwfJkf45kpLhfomH1"><font color=white>VCNwQjHsPoEEW1vw8JwfJkf45kpLhfomH1</font></a>
+							<a target="_blank" class="clickable" href="https://explorer.kevacoin.org/address/VDoPgLVrLJqDUv14x56CNgptLwJBCB8BPc"><font color=white>VDoPgLVrLJqDUv14x56CNgptLwJBCB8BPc</font></a>
 
 				</p>
 				<p>
 				<br>RVN Donation Address
 
-							<a target="_blank" class="clickable" href="https://ravencoin.network/address/RRMEDegtRSPgVfNv7viJC5S7TyeUA9Q1uD"><font color=white>RRMEDegtRSPgVfNv7viJC5S7TyeUA9Q1uD</font></a>
+							<a target="_blank" class="clickable" href="https://ravencoin.network/address/RBsTqvvXwHzpP8SndUufnSeDmVxkjLioMr"><font color=white>RBsTqvvXwHzpP8SndUufnSeDmVxkjLioMr</font></a>
 
 							</p>
 
@@ -241,7 +241,7 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                         <div class="left">
                             
                             <p>
-							   /hotke1 HOTKEY1-9 in space (alt+1~9)<br>
+							   /hotkey1 RPGKEY1-9 in space (alt+1~9)<br>
 							   /0 like (alt+0)<br>
                                /afk keep you online (alt+a)<br>
                                /check rvn/doge/btc address (alt+c)<br>
@@ -269,10 +269,16 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
 
 							You can follow and reward this namespace <a target="_blank" class="clickable" href="https://keva.app/?62829552">62829552</a> or find more server coins address.
 
-							<a target="_blank" class="clickable" href="https://explorer.kevacoin.org/address/VCNwQjHsPoEEW1vw8JwfJkf45kpLhfomH1">KVA</a> <a target="_blank" class="clickable" href="https://ravencoin.network/address/RRMEDegtRSPgVfNv7viJC5S7TyeUA9Q1uD">RVN</a> <a target="_blank" class="clickable" href="https://blockchair.com/dogecoin/address/DQw9LVhEwnHahSDHgvmAsSzD2uMtkV6HoU">DOGE</a><br>
+							<a target="_blank" class="clickable" href="https://explorer.kevacoin.org/address/VDoPgLVrLJqDUv14x56CNgptLwJBCB8BPc">KVA</a> <a target="_blank" class="clickable" href="https://ravencoin.network/address/RBsTqvvXwHzpP8SndUufnSeDmVxkjLioMr">RVN</a> <a target="_blank" class="clickable" href="https://blockchair.com/dogecoin/address/DQw9LVhEwnHahSDHgvmAsSzD2uMtkV6HoU">DOGE</a><br>
 
 							62881502 First Step<br>
-							62884861 Goblin's Treasure
+							62884861 Goblin's Treasure<br>
+							62945041 Let's Emoji<br>
+							62945384 Hero<br>
+							62961741 You have messengers
+
+
+
 
 							</p>
                           <br>
