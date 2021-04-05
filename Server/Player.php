@@ -83,6 +83,8 @@ class Player extends Character
             $this->server->pushSpawnsToPlayer($this, $message);
         }
         else if($action === TYPES_MESSAGES_ZONE) {
+
+
             call_user_func($this->zoneCallback);
         }
         else if($action == TYPES_MESSAGES_CHAT) 
@@ -96,6 +98,11 @@ class Player extends Character
             }
         }
         else if($action == TYPES_MESSAGES_MOVE) {
+
+		
+
+		
+
             if($this->moveCallback) 
             {
                 $x = $message[1];
@@ -107,13 +114,21 @@ class Player extends Character
                     
                     $this->broadcast(new Messages\Move($this));
                     call_user_func($this->moveCallback, $this->x, $this->y);
+
+					
+
                 }
             }
         }
         else if($action == TYPES_MESSAGES_LOOTMOVE) {
+
+			
+			
             if($this->lootmoveCallback) 
             {
                 $this->setPosition($message[1], $message[2]);
+
+
                 
                 $item = $this->server->getEntityById($message[3]);
                 if($item) 
@@ -125,24 +140,55 @@ class Player extends Character
             }
         }
         else if($action == TYPES_MESSAGES_AGGRO) {
+			
+	
+
             if($this->moveCallback) 
             {
                 $this->server->handleMobHate($message[1], $this->id, 5);
+				$mob = $this->server->getEntityById($message[1]);
+						$monr=rand(1,12);
+						$mobtk="";
+
+					if($monr==6){$mobtk="<img src=img/emoji/1.gif width=27>";}
+					if($monr==1){$mobtk="<img src=img/emoji/8.gif width=40>";}
+					if($monr==2){$mobtk="<img src=img/emoji/9.gif width=27>";}
+					if($monr==3){$mobtk="<img src=img/emoji/10.gif width=27>";}
+					if($monr==4){$mobtk="<img src=img/emoji/13.gif width=27>";}
+					if($monr==5){$mobtk="<img src=img/emoji/14.gif width=27>";}
+				
+
+					if($mobtk !=""){
+					$this->server->pushToPlayer($this, new Messages\Chat($mob, $mobtk));}
+
+
+
+
+
             }
         }
         else if($action == TYPES_MESSAGES_ATTACK) {
             $mob = $this->server->getEntityById($message[1]);
+
+
+
             if($mob) 
             {
                 $this->setTarget($mob);
                 $this->server->broadcastAttacker($this);
+
+
+
             }
         }
         else if($action == TYPES_MESSAGES_HIT) {
             $mob = $this->server->getEntityById($message[1]);
+
             if($mob) 
             {
                 $dmg = Formulas::dmg($this->weaponLevel, $mob->armorLevel);
+
+				
                 
                 if($dmg > 0 && is_callable(array($mob, 'receiveDamage')))
                 {
@@ -158,10 +204,20 @@ class Player extends Character
             {
                 $this->hitPoints -= Formulas::dmg($mob->weaponLevel, $this->armorLevel);
                 $this->server->handleHurtEntity($this);
+
+
                 
                 if($this->hitPoints <= 0) 
                 {
                     $this->isDead = true;
+									
+					$monr=rand(1,3);
+					if($monr==1){$mobtk="<img src=img/emoji/8.gif width=40>";}
+					if($monr==2){$mobtk="<img src=img/emoji/9.gif width=27>";}
+					if($monr==3){$mobtk="<img src=img/emoji/10.gif width=27>";}
+					
+					$this->server->pushToPlayer($this, new Messages\Chat($mob, $mobtk));
+
                     if(!empty($this->firepotionTimeout)) 
                     {
                         Timer::del($this->firepotionTimeout);

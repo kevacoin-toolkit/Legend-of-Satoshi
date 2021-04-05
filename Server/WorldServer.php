@@ -495,6 +495,8 @@ class WorldServer
     {
         $this->addEntity($mob);
         $this->mobs[$mob->id] = $mob;
+
+		
     }
     
     public function addNpc($kind, $x, $y) 
@@ -644,6 +646,8 @@ class WorldServer
             
             $this->broadcastAttacker($mob);
             echo $mob->id . " is now attacking " . $player->id."\n";
+
+		
         }
     }
     
@@ -704,6 +708,16 @@ class WorldServer
 			
             // Let the mob's attacker (player) know how much damage was inflicted
             $this->pushToPlayer($attacker, new Messages\Damage($entity, $damage));
+
+			$mon=Types::getKindAsString($entity->kind);
+
+				if($mon=="goblin"){
+
+					$mobtk="<img src=img/emoji/9.gif width=27>";
+					$erand=rand(1,4);
+					if($erand=="1"){
+					$this->pushToPlayer($attacker, new Messages\Chat($entity, $mobtk));}}
+
         }
 
         // If the entity is about to die
@@ -757,7 +771,7 @@ class WorldServer
 						
 					{
 
-					$putnew=$kpc->keva_put("NUtVW7Psz2GcjhYCeWTUY6sD1pMyyioHk7",$getnum[0],"First Step in Legend of Satoshi \n\n{{QmSGR7puGP2bXpzxjQ3oFiNktJUc4DyrHCMNJodvnpMQop|image/png}}");
+					
 
 					$putnew=$kpc->keva_put("NWn2wUdctLvoatDuqFmcfxEuJmFx9EbSre",$getnum[0],$mon);
 
@@ -770,7 +784,7 @@ class WorldServer
 				
 						$error = $kpc->error;
 
-						if($error !="") {$errlog="KVA";}
+						if($error !="") {$errlog="KVA";}else{$putnew=$kpc->keva_put("NUtVW7Psz2GcjhYCeWTUY6sD1pMyyioHk7",$getnum[0],"First Step in Legend of Satoshi \n\n{{QmSGR7puGP2bXpzxjQ3oFiNktJUc4DyrHCMNJodvnpMQop|image/png}}");}
 					}
 
 						
@@ -781,30 +795,68 @@ class WorldServer
 					
 					{
 					
-					$luckyb=rand(1,6);
-					if($luckyb==1){$damage="10,000 BTC";}
-					if($luckyb==2){$damage="10,000 ETH";}
-					if($luckyb==3){$damage="1,000,000 RVN";}
-					if($luckyb==4){$damage="1,000,000 KVA";}
-					if($luckyb==5){$damage="1,000,000 DOGE";}
-					if($luckyb==6){
+					$luckyb=rand(1,3);
+					$emojic=0;
+
+					if($luckyb==1){
+						
+								   $luckyl=rand(1,5);
+
+					if($luckyl==1){$damage="10,000 BTC";}
+					if($luckyl==2){$damage="10,000 ETH";}
+					if($luckyl==3){$damage="1,000,000 RVN";}
+					if($luckyl==4){$damage="1,000,000 KVA";}
+					if($luckyl==5){$damage="1,000,000 DOGE";}
+
+									}
+
+					if($luckyb==2){
 						$checknew=$kpc->keva_get("NLbbLeVppyVEMKd5LocLSXEdjaDReaq87z",$getnum[0]);
 						if(!$checknew['value']){
 						$putnew=$kpc->keva_put("NLbbLeVppyVEMKd5LocLSXEdjaDReaq87z",$getnum[0],"Goblin's Treasure in Legend of Satoshi \n\n{{QmWfCec74cpPS9t3JGoxwMyw4bsLodBdy8hwF8AhXoTU9v|image/png}}");
 
 						$damage="I found goblin's secret";}
 						}
+					if($luckyb==3){$emojic=1;
+					
+					$giftasset=$rpc->listassetbalancesbyaddress($rvnadd);
+
+					$emoji8="KEVA.APP/EMOJI/8";
+					$emoji9="KEVA.APP/EMOJI/9";
+					$emoji10="KEVA.APP/EMOJI/10";
+
+					$emrand=rand(8,10);
+
+					if($emrand=="8"){if($giftasset[$emoji8]<3){$bonuschip=$rpc->transfer($emoji8,1,$rvnadd);$damage="EMOJI 8";}else{$damage="No more EMOJI 8";}}
+
+					if($emrand=="9"){if($giftasset[$emoji9]<3){$bonuschip=$rpc->transfer($emoji9,1,$rvnadd);$damage="EMOJI 9";}else{$damage="No more EMOJI 9";}}
+
+					if($emrand=="10"){if($giftasset[$emoji10]<3){$bonuschip=$rpc->transfer($emoji10,1,$rvnadd);$damage="EMOJI 10";}else{$damage="No more EMOJI 10";}}
+					
 					
 					}
+
+					//emoji nft
+
+					if($emojic==1){
+						$checknew=$kpc->keva_get("Nbys5xFT5uycHuvrEDQFyZyWwHDcGjQ5QQ",$getnum[0]);
+						if(!$checknew['value']){
+						$putnew=$kpc->keva_put("Nbys5xFT5uycHuvrEDQFyZyWwHDcGjQ5QQ",$getnum[0],"Let's Emoji in Legend of Satoshi, so much fun.\n\n{{QmY6Hci6NkaZeJyzBmiU8DRcWChh6Ncv9L3rgtcksBNYpv|image/png}}");}}
+					
+					}
+
+				
 
 					//check mon
 
 					$checknew=$kpc->keva_get("NWn2wUdctLvoatDuqFmcfxEuJmFx9EbSre",$getnum[0]);
 
+					
+
 					if(stristr($checknew['value'],$mon) == false){
 
 						$monadd=$checknew['value'].",".$mon;
-						$putnew=$kpc->keva_put("NWn2wUdctLvoatDuqFmcfxEuJmFx9EbSre",$getnum[0],	$monadd);
+						
 
 						$forfree=rand(1,9);
 						$forfree=$forfree*$exp/100;
@@ -814,13 +866,63 @@ class WorldServer
 				
 						$error = $kpc->error;
 
-						if($error !="") {$errlog="KVA";}
+						if($error !="") {$errlog="KVA";}else{$putnew=$kpc->keva_put("NWn2wUdctLvoatDuqFmcfxEuJmFx9EbSre",$getnum[0],	$monadd);}
+
 					
 					}
 
-				
+					//checkhero
 
-		
+					$checknew=$kpc->keva_get("NWn2wUdctLvoatDuqFmcfxEuJmFx9EbSre",$getnum[0]);
+
+					if(strlen($checknew['value'])>77){
+
+						$checknew=$kpc->keva_get("NTtHuPT71qWY8e11hXfzZ7dc35d5Ex2nwm",$getnum[0]);
+
+						if(!$checknew['value']){
+
+						$putnew=$kpc->keva_put("NTtHuPT71qWY8e11hXfzZ7dc35d5Ex2nwm",$getnum[0],"You're my Hero in Legend of Satoshi.\n\n{{Qmb5FCrfoWpV5kdaBGCqQtNszzn8rrwjDKdyQuZtie4zxV|image/png}}");
+						
+						$error = $kpc->error;
+
+						if(!$error) {$damage="I'm hero now.";}
+						
+						}}
+
+				if(!$damage){
+
+
+
+					if($mon=="bat"){
+
+					$checknew=$kpc->keva_get("NTtHuPT71qWY8e11hXfzZ7dc35d5Ex2nwm",$getnum[0]);
+
+						if($checknew['value'] !=""){
+
+						$checknew=$kpc->keva_get("NTzbaZNQHo3LrEzayUZQkJa4ssj7qUoYtY",$getnum[0]);
+
+							if(!$checknew['value']){
+
+						
+
+						
+						$forfree=rand(1,9);
+						$forfree=$forfree*$exp/100;
+						$forfree=strval($forfree);
+					
+						$age= $rpc->sendtoaddress($rvnadd,$forfree); $damage=$forfree." RVN";
+				
+						$error = $kpc->error;
+
+						if($error !="") {$errlog="RVN";}else{$putnew=$kpc->keva_put("NTzbaZNQHo3LrEzayUZQkJa4ssj7qUoYtY",$getnum[0],"You have messengers in Legend of Satoshi.\n\n{{QmfV5qSLJhF8MXW8qFUnkuyhW9MAVs3wSBRghwSkfqahuz|image/png}}");}
+						
+						
+							}
+						}
+
+					}
+
+				}
 
 				if(!$error) 
 		
@@ -833,7 +935,11 @@ class WorldServer
 				$this->pushToPlayer($attacker, new Messages\Damage($entity, $damage));
 
 				$this->pushToPlayer($attacker, new Messages\Chat($attacker, $damage));
-				}
+
+						
+						
+								
+					}
 				}
 				else
 				
@@ -848,8 +954,7 @@ class WorldServer
 				}
 
 
-						
-
+					
 
 
                 $this->pushToPlayer($attacker, new Messages\Kill($mob));
@@ -1476,8 +1581,8 @@ class Raven {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-        $this->host          = '192.168.152.6'; // Localhost
-		//$this->host          = '127.0.0.1'; // Localhost
+        //$this->host          = '192.168.152.6'; // Localhost
+		$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9991';
         $this->url           = $url;
 
@@ -1591,8 +1696,8 @@ class Keva {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-		$this->host          = '192.168.152.6'; // Localhost
-		//$this->host          = '127.0.0.1'; // Localhost
+		//$this->host          = '192.168.152.6'; // Localhost
+		$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9992';
         $this->url           = $url;
 
@@ -1706,8 +1811,8 @@ class Doge {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-		$this->host          = '192.168.152.6'; // Localhost
-		//$this->host          = '127.0.0.1'; // Localhost
+		//$this->host          = '192.168.152.6'; // Localhost
+		$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9993';
         $this->url           = $url;
 
