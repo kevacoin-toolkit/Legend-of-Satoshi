@@ -115,6 +115,19 @@ class Chat
 
 		if($message=="/0"){$message="<img src=img/emoji/0.gif width=27>";}
 
+		//time
+
+		
+		if($message=="/time")
+			
+			{
+				$timeblock=$kpc->keva_get("NUtVW7Psz2GcjhYCeWTUY6sD1pMyyioHk7",$getnum[0]);
+				$timebt=$kpc->getblockheaderbyheight($timeblock["height"]);
+				$timepass=intval((time()-$timebt["block_header"]["timestamp"])/86400);
+				$message=$timepass." DAYS";
+				
+			}
+
 		//check
 
 	
