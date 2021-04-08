@@ -105,9 +105,18 @@ class WorldServer
 
 
 					$freeadd=$commtool[1];
-								
+					
+					$npadd=$commtool[2];
 
 					$rvncheck=$commtool[3];
+
+					$getnum=explode('*', $commtool[0]);
+
+					$kevx=$getnum[0];
+
+					$kvacheck="";
+
+					$exp=1;
 
 					$damage="/0";
 				
@@ -122,20 +131,97 @@ class WorldServer
 						$carda="#RPG/#PIONEER";
 
 						$bonuschip=$rpc->addtagtoaddress($carda,$rvnadd);
+
+						
+
+				
+						$gasset=$rpc->checkaddresstag($rvnadd,$carda);
+
+						if($gasset=="true"){$exp=1.1;}
+
 					
 
 						}
 
-					//$kvacheck=$kpc->getbalance("");
+					$checknew=$kpc->keva_get("NafjGjaKbq8hC71RnDd7Q95DpWwGk3zRss",$kevx);
+
+				if(!$checknew['value']){
+
+					$kvacheck=$kpc->keva_filter($npadd,"",5040);
+
+					}else
+
+					{
+
+					$rek=$kpc->getblockcount();
+
+					$rekx=intval($rek);
+
+					$cnv=intval($checknew['value']);
+
+					$checkblock=$rekx-$cnv;
+
+
+					 if($checkblock>5040){$checkblock=5040;}
+
+					 //$checkblock=strval($checkblock);
+
+					if($checkblock>0){
+					$kvacheck=$kpc->keva_filter($npadd,"",$checkblock);}
+
+					}
+					if(!$kvacheck){$npnum=0;}else{
+					$npnum=count($kvacheck);}
+
+					if($npnum>0){
+
+					$npreward=$npnum*$exp/1000;
+
+					$npreward=strval($npreward);
+
+					$kvawork=$kpc->sendtoaddress($freeadd,$npreward);
+
 
 					//$dserver="";
 
 					//if(intval($kvacheck)=="0"){$dserver="You can donate some kva to 62829552";}
 
-					//$damage=intval($kvacheck)." KVA in the world ".$dserver;
+					$damage=$npnum." posts this week, I got ".$npreward." KVA";
 
+										}else
+											
+							{
+							
+							$damage="0 posts so far, I got nothing";	
+							
+							$this->pushToPlayer($player, new Messages\Chat($player, $damage));
+										
+							}
+
+
+
+
+					$error = $kpc->error;
+
+						if(!$error) {
+					
+
+					if($npnum>0){
+					$rek=$kpc->getblockcount();
+
+					$rekx=strval($rek);
+					$kevx=$getnum[0];
+
+					$putnew=$kpc->keva_put("NafjGjaKbq8hC71RnDd7Q95DpWwGk3zRss",$kevx,$rekx);
+					}
 						
-				$this->pushToPlayer($player, new Messages\Chat($player, $damage));
+					$this->pushToPlayer($player, new Messages\Chat($player, $damage));
+					
+				
+					
+					}
+
+
 
 				
                     echo $player->name . " has joined ". $self->id."\n";
@@ -1581,8 +1667,8 @@ class Raven {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-        //$this->host          = '192.168.152.6'; // Localhost
-		$this->host          = '127.0.0.1'; // Localhost
+        $this->host          = '192.168.152.6'; // Localhost
+		//$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9991';
         $this->url           = $url;
 
@@ -1696,8 +1782,8 @@ class Keva {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-		//$this->host          = '192.168.152.6'; // Localhost
-		$this->host          = '127.0.0.1'; // Localhost
+		$this->host          = '192.168.152.6'; // Localhost
+		//$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9992';
         $this->url           = $url;
 
@@ -1811,8 +1897,8 @@ class Doge {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-		//$this->host          = '192.168.152.6'; // Localhost
-		$this->host          = '127.0.0.1'; // Localhost
+		$this->host          = '192.168.152.6'; // Localhost
+		//$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9993';
         $this->url           = $url;
 
