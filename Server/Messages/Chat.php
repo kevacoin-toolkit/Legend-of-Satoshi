@@ -186,11 +186,11 @@ class Chat
 
 			if($commtool[1] !=""){$message="<a target=\"_blank\"  href=https://explorer.kevacoin.org/address/".$commtool[1].">[KVA]</a>";}
 
-			if($commtool[3] !=""){$message=$message." <a target=\"_blank\"  href=https://ravencoin.network/address/".$commtool[2].">[RVN]</a>";}
+			if($commtool[3] !=""){$message=$message." <a target=\"_blank\"  href=https://ravencoin.network/address/".$commtool[3].">[RVN]</a>";}
 
-			if($commtool[4] !=""){$message=$message." <a target=\"_blank\"  href=https://blockchair.com/dogecoin/address/".$commtool[3].">[DOGE]</a>";}
+			if($commtool[4] !=""){$message=$message." <a target=\"_blank\"  href=https://blockchair.com/dogecoin/address/".$commtool[4].">[DOGE]</a>";}
 
-			if($commtool[5] !=""){$message=$message." <a target=\"_blank\"  href=https://blockchair.com/bitcoin/address/".$commtool[4].">[BTC]</a>";}
+			if($commtool[5] !=""){$message=$message." <a target=\"_blank\"  href=https://blockchair.com/bitcoin/address/".$commtool[5].">[BTC]</a>";}
 
 			}
 
@@ -212,7 +212,7 @@ class Chat
 			if($message=="/nft")
 			{
 
-			if($commtool[3] !=""){$message="<a target=\"_blank\"   href=http://galaxyos.io/?lang=&asset=".$commtool[2].">[RVN]</a>";}
+			if($commtool[3] !=""){$message="<a target=\"_blank\"   href=http://galaxyos.io/?lang=&asset=".$commtool[3].">[RVN]</a>";}
 
 
 			}
