@@ -186,7 +186,7 @@ class Chat
 
 			if($commtool[1] !=""){$message="<a target=\"_blank\"  href=https://explorer.kevacoin.org/address/".$commtool[1].">[KVA]</a>";}
 
-			if($commtool[3] !=""){$message=$message." <a target=\"_blank\"  href=https://ravencoin.network/address/".$commtool[3].">[RVN]</a>";}
+			if($commtool[3] !=""){$message=$message." <a target=\"_blank\"  href=https://explorer.ravenland.org/address/".$commtool[3].">[RVN]</a>";}
 
 			if($commtool[4] !=""){$message=$message." <a target=\"_blank\"  href=https://blockchair.com/dogecoin/address/".$commtool[4].">[DOGE]</a>";}
 
