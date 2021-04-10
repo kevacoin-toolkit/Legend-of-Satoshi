@@ -211,8 +211,10 @@ class Chat
 			
 			if($message=="/nft")
 			{
+			
+			$message="<a target=\"_blank\"   href=https://keva.app/?nft".$getnum[0].">[ALL]</a>";
 
-			if($commtool[3] !=""){$message="<a target=\"_blank\"   href=http://galaxyos.io/?lang=&asset=".$commtool[3].">[RVN]</a>";}
+			if($commtool[3] !=""){$message=$message." <a target=\"_blank\"   href=http://galaxyos.io/?lang=&asset=".$commtool[3].">[RVN]</a>";}
 
 
 			}
