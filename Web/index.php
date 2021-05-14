@@ -18,12 +18,13 @@ $rvn=trim($_REQ["rvn"]);
 $keva=trim($_REQ["keva"]);
 $doge=trim($_REQ["doge"]);
 $btc=trim($_REQ["btc"]);
+$chia=trim($_REQ["chia"]);
 
 
 
 if(!$scode){$in="";}else{$in=$scode."*".$sname;if(!$keva){$url ="https://keva.app/?rpg".$scode;echo "<script>window.location.href=decodeURIComponent('".$url."')</script>";}}
 
-if(!$scode){$serv="";}else{$serv=$scode."*".$sname."|".$keva."|".$ns."|".$rvn."|".$doge."|".$btc;}
+if(!$scode){$serv="";}else{$serv=$scode."*".$sname."|".$keva."|".$ns."|".$rvn."|".$doge."|".$btc."|".$chia;}
 
 ?>
 
@@ -115,9 +116,9 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
 							</p>
 
 							<p>
-				<br>DOGE Donation Address
+				<br>CHIA Donation Address
 
-							<a target="_blank" class="clickable" href="https://blockchair.com/dogecoin/address/DQw9LVhEwnHahSDHgvmAsSzD2uMtkV6HoU"><font color=white>DQw9LVhEwnHahSDHgvmAsSzD2uMtkV6HoU</font></a>
+							<a target="_blank" class="clickable" href="https://www.chiaexplorer.com/blockchain/address/xch1n92we22h9leh9u69ps0uv3frqg2axeah0wcksv4z6qynjlcrgxds59qnag"><font color=white>xch1n92we22h9leh9u69ps0uv3frqg2axeah0wcksv4z6qynjlcrgxds59qnag</font></a>
 
 							</p>
 
@@ -243,7 +244,7 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                             <p>
 							   /hotkey1 RPGKEY1-9 in space (alt+1~9)<br>
 							   /0 like (alt+0)<br>
-                               /afk keep you online (alt+a)<br>
+                               /time days you play<br>
                                /check rvn/doge/btc address (alt+c)<br>
 							   /coin address balance link (alt+v)<br>
 							   /nft NFTs list link (alt+t)<br>
