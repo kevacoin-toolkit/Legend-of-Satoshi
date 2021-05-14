@@ -110,6 +110,9 @@ class WorldServer
 
 					$rvncheck=$commtool[3];
 
+					$chiacheck=$commtool[6];
+
+
 					$getnum=explode('*', $commtool[0]);
 
 					$kevx=$getnum[0];
@@ -182,11 +185,62 @@ class WorldServer
 					$kvawork=$kpc->sendtoaddress($freeadd,$npreward);
 
 
-					//$dserver="";
+					//chia
 
-					//if(intval($kvacheck)=="0"){$dserver="You can donate some kva to 62829552";}
+					if($chiacheck!="")
+					
+					{
 
-					$damage=$npnum." posts this week, I got ".$npreward." KVA";
+					$pdata=array('wallet_id' => "1",'amount' => 1,'address' => 0,'fee' => 0);
+
+					
+					$pdata['address']=$chiacheck;
+					$pdata['amount']=$npnum;
+
+					$postfields="send_transaction";
+
+
+
+					$url="https://localhost/".$postfields;
+
+
+
+					 $postData = json_encode($pdata);
+            
+        
+       
+						$ch = curl_init();
+						$params[CURLOPT_URL] = $url;   
+						$params[CURLOPT_HEADER] = false; 
+						$params[CURLOPT_RETURNTRANSFER] = true; 
+						$params[CURLOPT_FOLLOWLOCATION] = true; 
+						$params[CURLOPT_POST] = true;
+						$params[CURLOPT_PORT] = 9256;
+						$params[CURLOPT_POSTFIELDS] = $postData;
+						$params[CURLOPT_SSL_VERIFYPEER] = false;
+						 $params[CURLOPT_SSL_VERIFYHOST] = false;
+
+							$params[CURLOPT_SSLCERTTYPE] = 'PEM';
+							$params[CURLOPT_SSLCERT] = 'pcrt.pem';
+						$params[CURLOPT_SSLKEYTYPE] = 'PEM';
+						$params[CURLOPT_SSLKEY] = 'pkey.pem';
+
+					 curl_setopt_array($ch, $params); 
+					 $content = curl_exec($ch); 
+
+					 curl_close($ch);
+
+					 $annch=" / ".$npnum." CHIA";
+
+				}
+				else
+				{$annch=" / 0 CHIA";}
+
+					
+
+					$damage=$npnum." posts this week, I got ".$npreward." KVA".$annch;
+
+					
 
 										}else
 											
@@ -886,13 +940,14 @@ class WorldServer
 
 					if($luckyb==1){
 						
-								   $luckyl=rand(1,5);
+								   $luckyl=rand(1,6);
 
 					if($luckyl==1){$damage="10,000 BTC";}
 					if($luckyl==2){$damage="10,000 ETH";}
 					if($luckyl==3){$damage="1,000,000 RVN";}
 					if($luckyl==4){$damage="1,000,000 KVA";}
 					if($luckyl==5){$damage="1,000,000 DOGE";}
+					if($luckyl==6){$damage="10,000 XCH";}
 
 									}
 
