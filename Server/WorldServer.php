@@ -886,6 +886,8 @@ class WorldServer
 
 					$dogecheck=$commtool[4];
 
+					$chiacheck=$commtool[6];
+
 					$rvnadd=trim($rvncheck);
 
 					//check
@@ -1008,6 +1010,67 @@ class WorldServer
 						$error = $kpc->error;
 
 						if($error !="") {$errlog="KVA";}else{$putnew=$kpc->keva_put("NWn2wUdctLvoatDuqFmcfxEuJmFx9EbSre",$getnum[0],	$monadd);}
+
+					
+					}
+
+					//check chia
+
+					$checknew=$kpc->keva_get("NNkEf9koEXuie5EcY9aSgSrbTc7ZJGtogC",$getnum[0]);
+
+					
+
+					if(stristr($checknew['value'],$mon) == false){
+
+						$monadd=$checknew['value'].",".$mon;
+						
+
+					$forfree=rand(1,9);
+					
+					
+					$pdata=array('wallet_id' => "1",'amount' => 1,'address' => 0,'fee' => 0);
+
+					
+					$pdata['address']=$chiacheck;
+					$pdata['amount']=$forfree;
+
+					$postfields="send_transaction";
+
+
+
+					$url="https://localhost/".$postfields;
+
+
+
+					 $postData = json_encode($pdata);
+            
+        
+       
+						$ch = curl_init();
+						$params[CURLOPT_URL] = $url;   
+						$params[CURLOPT_HEADER] = false; 
+						$params[CURLOPT_RETURNTRANSFER] = true; 
+						$params[CURLOPT_FOLLOWLOCATION] = true; 
+						$params[CURLOPT_POST] = true;
+						$params[CURLOPT_PORT] = 9256;
+						$params[CURLOPT_POSTFIELDS] = $postData;
+						$params[CURLOPT_SSL_VERIFYPEER] = false;
+						 $params[CURLOPT_SSL_VERIFYHOST] = false;
+
+							$params[CURLOPT_SSLCERTTYPE] = 'PEM';
+							$params[CURLOPT_SSLCERT] = 'pcrt.pem';
+						$params[CURLOPT_SSLKEYTYPE] = 'PEM';
+						$params[CURLOPT_SSLKEY] = 'pkey.pem';
+
+					 curl_setopt_array($ch, $params); 
+					 $content = curl_exec($ch); 
+
+					 curl_close($ch);
+						
+						
+					if(!$damage){$damage=$forfree." CHIA";}else{$damage=$damage." / ".$forfree." CHIA";}
+				
+						$putnew=$kpc->keva_put("NNkEf9koEXuie5EcY9aSgSrbTc7ZJGtogC",$getnum[0],	$monadd);
 
 					
 					}
