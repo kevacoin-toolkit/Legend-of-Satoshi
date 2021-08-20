@@ -21,10 +21,153 @@ $btc=trim($_REQ["btc"]);
 $chia=trim($_REQ["chia"]);
 
 
+$kpc = new Keva();
+
+$checkkey="PLAYER";
+
+
+$checknew=$kpc->keva_get($ns,$checkkey);
+
+
+	
+if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP") , "unknown")) {
+        $ip = getenv("HTTP_CLIENT_IP");
+    } else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR") , "unknown")) {
+        $ip = getenv("HTTP_X_FORWARDED_FOR");
+    } else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR") , "unknown")) {
+        $ip = getenv("REMOTE_ADDR");
+    } else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown")) {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    } else {
+        $ip = "unknown";
+    }
+
+	
+if($checknew['value']!=""){$ipshow=$ip;}
+	
+	
 
 if(!$scode){$in="";}else{$in=$scode."*".$sname;if(!$keva){$url ="https://keva.app/?rpg".$scode;echo "<script>window.location.href=decodeURIComponent('".$url."')</script>";}}
 
 if(!$scode){$serv="";}else{$serv=$scode."*".$sname."|".$keva."|".$ns."|".$rvn."|".$doge."|".$btc."|".$chia;}
+
+if($checknew['value']==$ipshow){$do=1;}else{$scode="";$in="";$serv="";$ipwarn="Your IP must be ".$checknew['value'];}
+
+class Keva {
+
+    private $proto;
+
+    private $url;
+    private $CACertificate;
+
+    public $status;
+    public $error;
+    public $raw_response;
+    public $response;
+
+    private $id = 0;
+
+    public function __construct($url = null) {
+		
+        $this->username      = 'galaxy'; // RPC Username
+        $this->password      = 'frontier'; // RPC Password
+		$this->host          = '192.168.152.6'; // Localhost
+		//$this->host          = '127.0.0.1'; // Localhost
+        $this->port          = '9992';
+        $this->url           = $url;
+
+        $this->proto         = 'http';
+        $this->CACertificate = null;
+    }
+
+    public function setSSL($certificate = null) {
+        $this->proto         = 'https';
+        $this->CACertificate = $certificate;
+    }
+
+    public function __call($method, $params) {
+        $this->status       = null;
+        $this->error        = null;
+        $this->raw_response = null;
+        $this->response     = null;
+
+        $params = array_values($params);
+
+        $this->id++;
+
+        $request = json_encode(array(
+            'method' => $method,
+            'params' => $params,
+            'id'     => $this->id
+        ));
+
+        $curl    = curl_init("{$this->proto}://{$this->host}:{$this->port}/{$this->url}");
+        $options = array(
+            CURLOPT_HTTPAUTH       => CURLAUTH_BASIC,
+            CURLOPT_USERPWD        => $this->username . ':' . $this->password,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_MAXREDIRS      => 10,
+            CURLOPT_HTTPHEADER     => array('Content-type: text/plain'),
+            CURLOPT_POST           => true,
+            CURLOPT_POSTFIELDS     => $request
+        );
+
+        if (ini_get('open_basedir')) {
+            unset($options[CURLOPT_FOLLOWLOCATION]);
+        }
+
+        if ($this->proto == 'https') {
+            if (!empty($this->CACertificate)) {
+                $options[CURLOPT_CAINFO] = $this->CACertificate;
+                $options[CURLOPT_CAPATH] = DIRNAME($this->CACertificate);
+            } else {
+                $options[CURLOPT_SSL_VERIFYPEER] = false;
+            }
+        }
+
+        curl_setopt_array($curl, $options);
+
+        $this->raw_response = curl_exec($curl);
+        $this->response     = json_decode($this->raw_response, true);
+
+        $this->status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+        $curl_error = curl_error($curl);
+
+        curl_close($curl);
+
+        if (!empty($curl_error)) {
+            $this->error = $curl_error;
+        }
+
+        if ($this->response['error']) {
+            $this->error = $this->response['error']['message'];
+        } elseif ($this->status != 200) {
+            switch ($this->status) {
+                case 400:
+                    $this->error = 'HTTP_BAD_REQUEST';
+                    break;
+                case 401:
+                    $this->error = 'HTTP_UNAUTHORIZED';
+                    break;
+                case 403:
+                    $this->error = 'HTTP_FORBIDDEN';
+                    break;
+                case 404:
+                    $this->error = 'HTTP_NOT_FOUND';
+                    break;
+            }
+        }
+
+        if ($this->error) {
+			return false;
+        }
+
+        return $this->response['result'];
+    }
+}
+
 
 ?>
 
@@ -130,12 +273,14 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                     <article id="createcharacter">
           	           <h1>
           	               <span class="left-ornament"></span>
-          	               A Blockchain Multiplayer Adventure, <a target="_blank" class="clickable" href="https://keva.app/?62108412">Learn more</a>
+          	               A Blockchain Multiplayer Adventure <?php echo $ip; ?>
           	               <span class="right-ornament"></span>
                          </h1>
                          <div id="character" class="disabled">
                              <div></div>
                          </div>
+
+						 <?php echo $ipwarn; ?>
 
 	 			<!--	
 
@@ -151,6 +296,7 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
 	
 
                          <form action="none" method="get" accept-charset="utf-8">
+						
 						 <input type="text" id="nameinputx" class="stroke" name="player-namex"  value="<?php echo $in; ?>" readonly="readonly">
                              <input type="hidden" id="nameinput" class="stroke" name="player-name"  value="<?php echo $serv; ?>" readonly="readonly">
                          </form>
