@@ -349,7 +349,7 @@ define(['jquery', 'app'], function($, App) {
 
 				if(altKey && key === 83) {
 
-                    game.say('/space');
+                    game.say('/shop');
                 }
 
 				
