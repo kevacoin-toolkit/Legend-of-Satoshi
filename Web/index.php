@@ -3,6 +3,7 @@ error_reporting(0);
 
 
 
+
 $_REQ = array_merge($_GET, $_POST);
 
 
@@ -394,10 +395,11 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                                /check rvn/doge/btc address (alt+c)<br>
 							   /coin address balance link (alt+v)<br>
 							   /nft NFTs list link (alt+t)<br>
-							   /space namespace link (alt+s)<br>
+							   /shop open cat.sale shop (alt+s)<br>
+							   /space namespace link<br>
 							   /kva server balance (alt+k)<br>
 							   /rvn server balance (alt+r)<br>
-							   /doge server balance (alt+d)<br>
+
 							   
 						
                             </p>
