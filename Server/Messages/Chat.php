@@ -115,6 +115,18 @@ class Chat
 
 		if($message=="/0"){$message="<img src=img/emoji/0.gif width=27>";}
 
+		//shop
+			
+			if($message=="/shop")
+
+			{
+
+			if($commtool[1] !=""){$message="<a target=\"_blank\"  href=https://cat.sale?".$getnum[0]."><img src=img/emoji/shop.png  style=\"margin: 0 auto;\"></a>";}
+
+			
+			}
+
+
 		//time
 
 		
@@ -177,6 +189,7 @@ class Chat
 			$message=$message." BTC in the world";
 			}
 		*/
+
 
 
 		//coin
@@ -253,8 +266,8 @@ class Raven {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-      //$this->host          = '192.168.152.6'; // Localhost
-		 $this->host          = '127.0.0.1'; // Localhost
+      $this->host          = '192.168.152.6'; // Localhost
+		 //$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9991';
         $this->url           = $url;
 
@@ -368,8 +381,8 @@ class Keva {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-        //$this->host          = '192.168.152.6'; // Localhost
-		$this->host          = '127.0.0.1'; // Localhost
+        $this->host          = '192.168.152.6'; // Localhost
+		//$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9992';
         $this->url           = $url;
 
@@ -483,8 +496,8 @@ class Doge {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-       //$this->host          = '192.168.152.6'; // Localhost
-		$this->host          = '127.0.0.1'; // Localhost
+       $this->host          = '192.168.152.6'; // Localhost
+		//$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9993';
         $this->url           = $url;
 
