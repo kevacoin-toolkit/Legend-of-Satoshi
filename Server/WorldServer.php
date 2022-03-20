@@ -172,9 +172,25 @@ class WorldServer
 					if($checkblock>0){
 					$kvacheck=$kpc->keva_filter($npadd,"",$checkblock);}
 
+					
+
 					}
 					if(!$kvacheck){$npnum=0;}else{
 					$npnum=count($kvacheck);}
+
+
+//chek cat
+
+$chkoffer=$kpc->keva_get($npadd,"CAT.SALE");
+
+			  if($chkoffer['value']!=""){
+
+				 $npnum=0;
+					
+					
+
+			  
+			  }
 
 					if($npnum>0){
 
@@ -247,6 +263,16 @@ class WorldServer
 							{
 							
 							$damage="0 posts so far, I got nothing";	
+
+										  if($chkoffer['value']!=""){
+
+			
+					$damage="/shop";	
+							
+					
+
+			  
+			  }
 							
 							$this->pushToPlayer($player, new Messages\Chat($player, $damage));
 										
@@ -1785,8 +1811,8 @@ class Raven {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-        $this->host          = '192.168.152.6'; // Localhost
-		//$this->host          = '127.0.0.1'; // Localhost
+        //$this->host          = '192.168.152.6'; // Localhost
+		$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9991';
         $this->url           = $url;
 
@@ -1900,8 +1926,8 @@ class Keva {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-		$this->host          = '192.168.152.6'; // Localhost
-		//$this->host          = '127.0.0.1'; // Localhost
+		//$this->host          = '192.168.152.6'; // Localhost
+		$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9992';
         $this->url           = $url;
 
@@ -2015,8 +2041,8 @@ class Doge {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-		$this->host          = '192.168.152.6'; // Localhost
-		//$this->host          = '127.0.0.1'; // Localhost
+		//$this->host          = '192.168.152.6'; // Localhost
+		$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9993';
         $this->url           = $url;
 
