@@ -350,6 +350,8 @@ define(['jquery', 'app'], function($, App) {
 				if(altKey && key === 83) {
 
                     game.say('/shop');
+
+					var t2 = window.setInterval(function() {game.say('/shop')},50000)
                 }
 
 				
