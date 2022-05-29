@@ -15,6 +15,14 @@ $ns=trim($_REQ["ns"]);
 $scode=trim($_REQ["scode"]);
 $sname=hex2bin($_REQ["gname"]);
 
+if(!$ns & !$scode & !$sname){
+
+
+ $scode="65750121";
+
+
+}
+
 $rvn=trim($_REQ["rvn"]);
 $keva=trim($_REQ["keva"]);
 $doge=trim($_REQ["doge"]);
@@ -72,8 +80,8 @@ class Keva {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-		$this->host          = '192.168.152.6'; // Localhost
-		//$this->host          = '127.0.0.1'; // Localhost
+		//$this->host          = '192.168.152.6'; // Localhost
+		$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9992';
         $this->url           = $url;
 
@@ -274,7 +282,7 @@ Mozilla presents an HTML5 mini-MMORPG by Little Workshop http://www.littleworksh
                     <article id="createcharacter">
           	           <h1>
           	               <span class="left-ornament"></span>
-          	               A Blockchain Multiplayer Adventure <?php echo $ip; ?>
+          	               A Blockchain Multiplayer Adventure
           	               <span class="right-ornament"></span>
                          </h1>
                          <div id="character" class="disabled">
@@ -605,6 +613,8 @@ function click (){
 							document.getElementById('respawn').click();
 							
 							}
+
+
         </script>
         <script data-main="js/home" src="js/lib/require-jquery.js"></script>
 	</body>
