@@ -121,7 +121,14 @@ class Chat
 
 			{
 
-			if($commtool[1] !=""){$message="<a target=\"_blank\"  href=https://cat.sale?".$getnum[0]."><img src=img/emoji/shop.png  style=\"margin: 0 auto;\"></a>";}
+			if($commtool[1] !=""){
+				
+				$shopname=$kpc->keva_get($commtool[2],"CAT.SALE");
+
+				$shopname=$shopname["value"];
+				
+				
+				$message="<a target=\"_blank\"  href=https://cat.sale?".$getnum[0]."><button type=\"button\" style=\"background:url(/img/emoji/shopb.png)no-repeat;border:0;width:119px;height:40px; text-align:left;padding-left:27%;padding-top:2%;font-size:14px;\">".$shopname."</button></a>";}
 
 			
 			}
@@ -266,8 +273,8 @@ class Raven {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-      $this->host          = '192.168.152.6'; // Localhost
-		 //$this->host          = '127.0.0.1'; // Localhost
+      //$this->host          = '192.168.152.6'; // Localhost
+		 $this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9991';
         $this->url           = $url;
 
@@ -381,8 +388,8 @@ class Keva {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-        $this->host          = '192.168.152.6'; // Localhost
-		//$this->host          = '127.0.0.1'; // Localhost
+       //$this->host          = '192.168.152.6'; // Localhost
+		$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9992';
         $this->url           = $url;
 
@@ -496,8 +503,8 @@ class Doge {
 		
         $this->username      = 'galaxy'; // RPC Username
         $this->password      = 'frontier'; // RPC Password
-       $this->host          = '192.168.152.6'; // Localhost
-		//$this->host          = '127.0.0.1'; // Localhost
+       //$this->host          = '192.168.152.6'; // Localhost
+		$this->host          = '127.0.0.1'; // Localhost
         $this->port          = '9993';
         $this->url           = $url;
 
