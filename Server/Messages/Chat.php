@@ -122,14 +122,57 @@ class Chat
 			{
 
 			if($commtool[1] !=""){
+
+				//shop list
+
+				$shopcs="NhMTJ9wXK4JNFdcE3FT1u8gDm6NEGtu5Cq";
+
+				$shopcsv=$kpc->keva_get($shopcs,$getnum[0]);
+
+				if($shopcsv['value']!=""){   
 				
 				$shopname=$kpc->keva_get($commtool[2],"CAT.SALE");
 
-				$shopname=$shopname["value"];
+				if(!$shopname['value']){
 				
+				$shopname=$kpc->keva_get($commtool[2],"_KEVA_NS_");
 				
-				$message="<a target=\"_blank\"  href=https://cat.sale?".$getnum[0]."><button type=\"button\" style=\"background:url(/img/emoji/shopb.png)no-repeat;border:0;width:119px;height:40px; text-align:left;padding-left:27%;padding-top:2%;font-size:14px;\">".$shopname."</button></a>";}
+				}
 
+				$shopname=$shopname["value"];
+
+				if(!$shopname){
+				
+				$shopname="CAT.SALE SHOP";
+				
+				}
+
+				 $url="https://cat.sale/logodata/".$getnum[0].".txt";
+				
+				 $ch = curl_init();
+				 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+				 curl_setopt($ch, CURLOPT_HEADER, false);
+				 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+				 curl_setopt($ch, CURLOPT_URL, $url);
+				 curl_setopt($ch, CURLOPT_REFERER, $url);
+				 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+				 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3000); // 3 sec.
+                 curl_setopt($ch, CURLOPT_TIMEOUT, 10000); // 10 sec.
+                 $result = curl_exec($ch);
+				 curl_close($ch);
+				
+				
+
+				$shoplogo=$result;
+
+				if(stristr($shoplogo,"https") == true){$shopimg="<img src=".$shoplogo." width=30   style=\"vertical-align:middle;border-radius:10px;\">";}else{$shopimg="<img src=https://cat.sale/nft/gold.png width=30  style=\"vertical-align:middle;border-radius:10px;\">";}
+
+				$spl=strlen($shopname);
+
+				if($spl>18){$shopname=substr($shopname,0,18)."...";}
+				
+				$message="<a target=\"_blank\"  href=https://cat.sale/".$getnum[0]."><button type=\"button\" style=\"background:url(/img/emoji/shopd.png);no-repeat;border:0;width:200px;height:40px; text-align:left;padding-left:5%;padding-top:2%;font-size:14px;\"><table border=0 style=\"table-layout:fixed;\"><tr><td width=36 valign=\"middle\">".$shopimg."</td><td width=154 style=\"overflow:hidden;text-overflow:ellipsis;nowrap:false;\">".$shopname."</td></tr></table></button></a>";}
+				  }
 			
 			}
 
